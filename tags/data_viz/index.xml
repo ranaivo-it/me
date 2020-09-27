@@ -1,0 +1,24 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>data_viz - Tag - Mahery Ranaivoson | Blog</title>
+        <link>https://ranaivo-it.github.io/me/tags/data_viz/</link>
+        <description>data_viz - Tag - Mahery Ranaivoson | Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>njato@outlook.fr (Mahery Ranaivoson)</managingEditor>
+            <webMaster>njato@outlook.fr (Mahery Ranaivoson)</webMaster><lastBuildDate>Wed, 02 Sep 2020 01:46:24 &#43;0530</lastBuildDate><atom:link href="https://ranaivo-it.github.io/me/tags/data_viz/" rel="self" type="application/rss+xml" /><item>
+    <title>Pandas Best Practices</title>
+    <link>https://ranaivo-it.github.io/me/posts/pandas-best-practice/</link>
+    <pubDate>Wed, 02 Sep 2020 01:46:24 &#43;0530</pubDate>
+    <author>Author</author>
+    <guid>https://ranaivo-it.github.io/me/posts/pandas-best-practice/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/posts/pandas-best-practice/pandas.png" referrerpolicy="no-referrer">
+            </div><div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>What is this article about?<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">This article provides a collection of the daily best practices and use cases of the Pandas library. It is meant to be a rolling release note by which I will mark down all of the better practice I came across along my journey towards data science.</div>
+        </div>
+    </div>]]></description>
+</item></channel>
+</rss>
