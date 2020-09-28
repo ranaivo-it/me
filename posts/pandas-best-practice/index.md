@@ -14,7 +14,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 
 
 ## Installation
-Pandas can be installed via pip from [PyPI](https://pypi.org/project/pandas/) 
+Pandas can be installed via pip from **[PyPI](https://pypi.org/project/pandas/)**
 ```shell 
 pip install pandas
 ```
@@ -30,7 +30,7 @@ As mentioned above and for handling different types of datasets pandas provides 
 
 
 ## Dataset
-The dataset being used in the following is either being created manually or the [Traffic and Pedestrian Stops](https://www.kaggle.com/faressayah/stanford-open-policing-project/notebooks) by the Police in Rhode Island available on Kaggle. The choice lies on the fact that this dataset has multiple data types from which multiple scenarios can be derived. 
+The dataset being used in the following is either being created manually or the **[Traffic and Pedestrian Stops](https://www.kaggle.com/faressayah/stanford-open-policing-project/notebooks)** by the Police in Rhode Island available on Kaggle. The choice lies on the fact that this dataset has multiple data types from which multiple scenarios can be derived. 
 
 ## Best practices  
 
