@@ -30,7 +30,7 @@ As mentioned above and for handling different types of datasets pandas provides 
 
 
 ## Dataset
-The dataset being used in the following is either being created manually or the [Traffic and Pedestrian Stops](https://www.kaggle.com/faressayah/stanford-open-policing-project/notebooks) by the Police in Rhode Island available on Kaggle. The choice lies on the fact that this dataset has multiple data types. 
+The dataset being used in the following is either being created manually or the [Traffic and Pedestrian Stops](https://www.kaggle.com/faressayah/stanford-open-policing-project/notebooks) by the Police in Rhode Island available on Kaggle. The choice lies on the fact that this dataset has multiple data types from which multiple scenarios can be derived. 
 
 ## Best practices  
 
@@ -41,10 +41,25 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt 
 %matplotlib inline 
+
+# whether to explicitly show the whole interactive output of jupyter notebook 
+# rather than showing only the last line.
+# use `last_expr` to revert back the default behavior
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
 ```
 {{< admonition info >}}
-For the full data analysis and visualization tasks, pandas is often incomplete and you need to have hands-on skills to other Python libraries like Numpy, Matplotlib or Seaborn but that is not mandatory and these are out of the scope of this article.
+- For the full data analysis and visualization tasks, pandas is often incomplete and you need to have hands-on skills to other Python libraries like Numpy, Matplotlib or Seaborn but they are not mandatory. They are only used here to help us generating dataset or ploting important findings.  
+- In this article, additional information about the code is explained using Python comments.  
 {{< /admonition >}}
+
+
+### 2. Get to know the data the dataset 
+One 
+
+
+
+
 
 
 
