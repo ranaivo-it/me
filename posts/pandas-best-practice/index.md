@@ -53,7 +53,7 @@ InteractiveShell.ast_node_interactivity = "all"
 {{< /admonition >}}
 
 
-### 2. Get to know the data the dataset 
+### 2. Get to know the dataset 
 
 
 
