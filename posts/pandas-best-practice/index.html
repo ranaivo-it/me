@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/"
-        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  440 ,
+        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  446 ,
         "url": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/","datePublished": "2020-09-27T01:46:24+05:30","dateModified": "2020-09-28T15:58:26+08:00","publisher": {
             "@type": "Organization",
             "name": "Mahery Ranaivoson"},"author": {
@@ -93,7 +93,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Pandas Best Practices</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://ranaivo-it.github.io/me/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mahery Ranaivoson</a></span>&nbsp;<span class="post-category">included in <a href="https://ranaivo-it.github.io/me/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;440 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;446 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -152,7 +152,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="pandas-components">Pandas components</h2>
-<p>As mentioned above and for handling different types of datasets pandas provides 2 data structures mainly wrapped over Numpy. <code>Series</code> is nothing but one dimension representation similar to the Python list but stuctured in the different way and <code>DataFrame</code> is a multi-dimensional array which can be thought as a collection of series. They are pretty similar in terms of operation as one can apply almost the same manipulation to both of them.</p>
+<p>As mentioned above and for handling different types of datasets pandas provides 2 data structures mainly wrapped over Numpy. <code>Series</code> is nothing but one dimension representation similar to the Numpy array but structured in the way it is explicitly associate an index with the values. Whereas <code>DataFrame</code> is a multi-dimensional array that can be thought of as a collection of series. They are pretty similar in terms of operation as one can apply almost the same manipulation to both of them.</p>
 <p><figure><a class="lightgallery" href="https://ranaivo-it.github.io/me/posts/pandas-best-practice/pandas_main_comps.png" title="Image credit: www.learndatasci.com" data-thumbnail="/posts/pandas-best-practice/pandas_main_comps.png" data-sub-html="<h2>Pandas main components</h2><p>Image credit: www.learndatasci.com</p>">
         <img
             class="lazyload"
@@ -169,25 +169,23 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 <h3 id="1-importing-necessary-libraries">1. Importing necessary libraries</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span> 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span> 
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span> 
 
-<span class="c1"># whether to explicitly show the whole interactive output of jupyter notebook </span>
-<span class="c1"># rather than showing only the last line.</span>
+<span class="c1"># whether to explicitly show the whole interactive output cells in </span>
+<span class="c1"># jupyter notebook rather than showing only the last line.</span>
 <span class="c1"># use `last_expr` to revert back the default behavior</span>
 <span class="kn">from</span> <span class="nn">IPython.core.interactiveshell</span> <span class="kn">import</span> <span class="n">InteractiveShell</span>
 <span class="n">InteractiveShell</span><span class="o">.</span><span class="n">ast_node_interactivity</span> <span class="o">=</span> <span class="s2">&#34;all&#34;</span>
@@ -205,8 +203,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </div>
         </div>
     </div>
-<h3 id="2-get-to-know-the-data-the-dataset">2. Get to know the data the dataset</h3>
-<p>One</p></div><div class="post-footer" id="post-footer">
+<h3 id="2-get-to-know-the-data-the-dataset">2. Get to know the data the dataset</h3></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

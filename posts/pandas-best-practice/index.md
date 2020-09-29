@@ -24,7 +24,7 @@ conda install pandas
 ```
 
 ## Pandas components
-As mentioned above and for handling different types of datasets pandas provides 2 data structures mainly wrapped over Numpy. `Series` is nothing but one dimension representation similar to the Python list but stuctured in the different way and `DataFrame` is a multi-dimensional array which can be thought as a collection of series. They are pretty similar in terms of operation as one can apply almost the same manipulation to both of them. 
+As mentioned above and for handling different types of datasets pandas provides 2 data structures mainly wrapped over Numpy. `Series` is nothing but one dimension representation similar to the Numpy array but structured in the way it is explicitly associate an index with the values. Whereas `DataFrame` is a multi-dimensional array that can be thought of as a collection of series. They are pretty similar in terms of operation as one can apply almost the same manipulation to both of them. 
 
 ![Image credit: www.learndatasci.com](/posts/pandas-best-practice/pandas_main_comps.png "Pandas main components")
 
@@ -40,10 +40,9 @@ The dataset being used in the following is either being created manually or the 
 import pandas as pd 
 import numpy as np
 import matplotlib.pyplot as plt 
-%matplotlib inline 
 
-# whether to explicitly show the whole interactive output of jupyter notebook 
-# rather than showing only the last line.
+# whether to explicitly show the whole interactive output cells in 
+# jupyter notebook rather than showing only the last line.
 # use `last_expr` to revert back the default behavior
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
@@ -55,7 +54,6 @@ InteractiveShell.ast_node_interactivity = "all"
 
 
 ### 2. Get to know the data the dataset 
-One 
 
 
 
