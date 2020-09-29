@@ -76,11 +76,11 @@ df.info()
 ```
 
 {{< admonition type=question title="Output" open=false >}}
-`read_csv()` is a Pandas common method designed specifically(but not limited to) to read a CSV data source. By default, CSV is separated by comma `,` as the name stands for but sometimes the file comes with different column separation such as `;`, `|`,`\tab`. In this case you can explicitly specify the separation character using the the argument `sep`. The argument `parse_dates` here is used to format the date column to be of type `datetime` and `index_col` is the way to set some variable as index. You can pass a list of columns to this argument. `usecols` specified a set of columns in which we are interested to perform the analysis.
+**`read_csv()`** is one of the most common Pandas method designed specifically, but not limited to, to read a CSV data source. By default, CSV is separated by comma `,` as the name stands for but sometimes the file comes with different column separation such as `;`, `|`,`\tab`. In such case, you can explicitly specify the separation character using the argument `sep`. Here, the argument `parse_dates` is used to format the date column to be of type `datetime` and `index_col` is the way to set some variable as the DataFrame index. You can pass a list of columns to this argument. Using `usecols`, you can define a set of columns in which you are about to perform the analysis rather than loading the whole columns.
 
 <br>
 
-`head(3)` shows the top 3 observations. You can specify as many rows as you want.  
+**`head(3)`** shows the top 3 observations. You can specify as many rows as you want.  
 <div>
 <table border="1" class="dataframe">
   <thead>
@@ -116,9 +116,11 @@ df.info()
 
 <br>
 
-`dtypes` lists the variable data type. By default, Pandas grabs `string` data type as `object` and numerical values are of type either `float` or `int`, unless explicitly specified.  
+**`dtypes`** lists the variable data type. By default, Pandas grabs `string` data type as `object` and numerical values are of type either `float` or `int`, unless explicitly predefined as the case over here. The column `stop_date` was pased while loading the dataset therefore this variable become of type `datetime`.
 
 <br> 
+
+
 
 
 {{< /admonition >}} 
