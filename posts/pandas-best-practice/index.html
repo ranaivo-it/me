@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/"
-        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  471 ,
+        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  763 ,
         "url": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/","datePublished": "2020-09-27T01:46:24+05:30","dateModified": "2020-09-28T15:58:26+08:00","publisher": {
             "@type": "Organization",
             "name": "Mahery Ranaivoson"},"author": {
@@ -93,8 +93,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Pandas Best Practices</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/me/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mahery Ranaivoson</a></span>&nbsp;<span class="post-category">included in <a href="/me/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;471 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;763 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/me/svg/loading.min.svg"
@@ -131,7 +131,7 @@
     </div>
 <h2 id="what-is-pandas">What is Pandas?</h2>
 <p><strong><a href="https://pandas.pydata.org/docs/getting_started/index.html" target="_blank" rel="noopener noreffer">Pandas</a></strong> is one of the most-used standard Python library when dealing with matrix-like transformable datasets which range from a simple tabular to a more complex structure dataset. It is an open-source library providing faster, flexible, and expressive mean for data manipulation and one of the essential to learn library in case you are getting in the data science field.<br>
-Mainly, it provides two well-suited data structures to multiple data type include <strong>Series</strong> and <strong>DataFrame</strong>. This article will get into both of them on which case one may be helpful over the other in the following.</p>
+Mainly, it provides two well-suited data structures to multiple data type include <strong>Series</strong> and <strong>DataFrame</strong>. This article will get into how to use both of them and the case on which one may be helpful over the other in the following.</p>
 <h2 id="installation">Installation</h2>
 <p>Pandas can be installed via pip from <strong><a href="https://pypi.org/project/pandas/" target="_blank" rel="noopener noreffer">PyPI</a></strong></p>
 <div class="highlight"><div class="chroma">
@@ -152,7 +152,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="pandas-components">Pandas components</h2>
-<p>As mentioned above and for handling different types of datasets pandas provides 2 data structures mainly wrapped over Numpy. <code>Series</code> is nothing but one dimension representation similar to the Numpy array but structured in the way it is explicitly associate an index with the values. Whereas <code>DataFrame</code> is a multi-dimensional array that can be thought of as a collection of series. They are pretty similar in terms of operation as one can apply almost the same manipulation to both of them.</p>
+<p>As mentioned earlier and to handle different types of datasets, pandas provides 2 data structures mainly wrapped over Numpy. <code>Series</code> is nothing but one dimension representation similar to the Numpy array but structured in the way it is explicitly associate an index with the values. Whereas <code>DataFrame</code> is a multi-dimensional array that can be thought of as a collection of series and its rows are also indexed by default unless it is explicitly done. They are pretty similar in terms of operations as one can apply almost the same manipulation to both of them.</p>
 <p><figure><a class="lightgallery" href="/posts/pandas-best-practice/pandas_main_comps.png" title="Image credit: www.learndatasci.com" data-thumbnail="/posts/pandas-best-practice/pandas_main_comps.png" data-sub-html="<h2>Pandas main components</h2><p>Image credit: www.learndatasci.com</p>">
         <img
             class="lazyload"
@@ -211,7 +211,80 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </div>
         </div>
     </div>
-<h3 id="2-get-to-know-the-dataset">2. Get to know the dataset</h3></div><div class="post-footer" id="post-footer">
+<h3 id="2-get-to-know-the-dataset">2. Get to know the dataset</h3>
+<p>This is the first essential tasks that you would perform before getting started your analysis. Understanding the dataset may extend from knowing what&rsquo;s inside, its content, its shape, the variable names, the variable datatypes, the ratio of null values, or going deeper to know the number of unique values of categorical variables, or even gather the descriptive statistics or the variable distribution. The following code snippet shows a few essential functions along with the must to know arguments to answer these questions.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;police_project.csv&#39;</span><span class="p">,</span> 
+                 <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> 
+                 <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">],</span>
+                 <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">,</span> <span class="s1">&#39;driver_gender&#39;</span><span class="p">,</span> <span class="s1">&#39;violation&#39;</span><span class="p">])</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="details admonition question">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw"></i>Output<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><code>read_csv()</code> is a Pandas common method designed specifically(but not limited to) to read a CSV data source. By default, CSV is separated by comma <code>,</code> as the name stands for but sometimes the file comes with different column separation such as <code>;</code>, <code>|</code>,<code>\tab</code>. In this case you can explicitly specify the separation character using the the argument <code>sep</code>. The argument <code>parse_dates</code> here is used to format the date column to be of type <code>datetime</code> and <code>index_col</code> is the way to set some variable as index. You can pass a list of columns to this argument. <code>usecols</code> specified a set of columns in which we are interested to perform the analysis.</p>
+<br>
+<p><code>head(3)</code> shows the top 3 observations. You can specify as many rows as you want.</p>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stop_date</th>
+      <th>driver_gender</th>
+      <th>violation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2005-01-02</td>
+      <td>M</td>
+      <td>Speeding</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2005-01-18</td>
+      <td>M</td>
+      <td>Speeding</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2005-01-23</td>
+      <td>M</td>
+      <td>Speeding</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<p><code>dtypes</code> lists the variable data type. By default, Pandas grabs <code>string</code> data type as <code>object</code> and numerical values are of type either <code>float</code> or <code>int</code>, unless explicitly specified.</p>
+<br> 
+</div>
+        </div>
+    </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
