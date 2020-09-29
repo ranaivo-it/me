@@ -30,7 +30,7 @@ As mentioned above and for handling different types of datasets pandas provides 
 
 
 ## Dataset
-The dataset being used in the following is either being created manually or the **[Traffic and Pedestrian Stops](https://www.kaggle.com/faressayah/stanford-open-policing-project/notebooks)** by the Police in Rhode Island available on Kaggle. The choice lies on the fact that this dataset has multiple data types from which multiple scenarios can be derived. 
+The dataset being used in the following is either being created manually or loaded from Seaborn repository or the **[Traffic and Pedestrian Stops](https://www.kaggle.com/faressayah/stanford-open-policing-project/notebooks)** by the Police in Rhode Island to make advanced operations. The choice lies in the fact that this dataset has multiple data types from which multiple scenarios can be derived.
 
 ## Best practices  
 
@@ -39,6 +39,7 @@ The dataset being used in the following is either being created manually or the 
 ```Python 
 import pandas as pd 
 import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt 
 
 # whether to explicitly show the whole interactive output cells in 
@@ -46,6 +47,9 @@ import matplotlib.pyplot as plt
 # use `last_expr` to revert back the default behavior
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
+# whether to display all DataFrame rows and cols 
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)  
 ```
 {{< admonition info >}}
 - For the full data analysis and visualization tasks, pandas is often incomplete and you need to have hands-on skills to other Python libraries like Numpy, Matplotlib or Seaborn but they are not mandatory. They are only used here to help us generating dataset or ploting important findings.  
@@ -54,6 +58,7 @@ InteractiveShell.ast_node_interactivity = "all"
 
 
 ### 2. Get to know the dataset 
+
 
 
 
