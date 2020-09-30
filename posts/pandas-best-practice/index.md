@@ -76,7 +76,7 @@ df.info(memory_usage='deep')
 df.dropna().describe(include=[np.number, np.datetime64, np.object])
 ```
 
-{{< admonition type=question title="Output" open=true >}}
+{{< admonition type=question title="Output" open=false >}}
 
 **`df.read_csv()`** is one of the most common Pandas method designed specifically, but not limited to, to read a CSV data source. By default, CSV is separated by comma `,` as the name stands for but sometimes the file comes with different column separation such as `;`, `|`,`\tab`. In such case, you can explicitly specify the separation character using the argument `sep`. Here, the argument `parse_dates` is used to format the date column to be of type `datetime` and `index_col` is the way to set some variable as the DataFrame index. You can pass a list of columns to this argument. Using `usecols`, you can define a set of columns in which you are about to perform the analysis.
 
