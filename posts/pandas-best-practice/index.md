@@ -135,7 +135,7 @@ df.dropna().describe(include=[np.number, np.datetime64, np.object])
 
 <br> 
 
-**`df.dropna().describe()`** is a way to get a quick summary of statistics for each column. `include=[np.number, np.datetime64, np.object]` filters out the columns by the dtypes and by default, it includes all the columns. Therefore, it doesn't have any effect in this case as all the dataset dtypes are including in the list. We can notice that some of the outputs are `NaN` and that is so because properties are dtypes dependent. Some properties that can apply to object data cannot apply to other data types and vice-versa.
+**`df.dropna().describe()`** is a way to get a quick summary of statistics of each column. `include=[np.number, np.datetime64, np.object]` filters out columns by data types and by default it includes all the columns. Therefore, it doesn't have any effect in this case as all the dataset dtypes are including in the list. We can notice that some of the outputs are `NaN` and that is so because properties are dtypes dependent. Some properties that can apply to object data cannot apply to other data types and vice-versa.
 
 <table border="1" class="dataframe">
   <thead>
