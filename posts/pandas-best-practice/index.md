@@ -63,31 +63,31 @@ pd.set_option('display.max_columns', None)
 This is the first essential tasks that you would perform before getting started your analysis. Understanding the dataset may extend from knowing what's inside, its content, its shape, the variable names, the variable datatypes, the ratio of null values, or going deeper to know the number of unique values of categorical variables, or even gather the descriptive statistics or the variable distribution. The following code snippet shows a few essential functions along with the must to know arguments to answer these questions.   
 
 ```Python 
-df = pd.read_csv('police_project.csv', 
+df = pd.read_csv('datasets/police_project.csv', 
                  sep=',', 
                  parse_dates=['stop_date'],
                  index_col=None,
-                 usecols=['stop_date', 'driver_gender', 'violation'])
+                 usecols=['stop_date', 'driver_gender','driver_age_raw', 'violation'])
 
-df.head()
-df.dtypes
-df.describe()
-df.info()
+df.head(3)
+df.info(memory_usage='deep')
+df.dropna().describe(include=[np.number, np.datetime64, np.object])
 ```
 
 {{< admonition type=question title="Output" open=false >}}
-**`read_csv()`** is one of the most common Pandas method designed specifically, but not limited to, to read a CSV data source. By default, CSV is separated by comma `,` as the name stands for but sometimes the file comes with different column separation such as `;`, `|`,`\tab`. In such case, you can explicitly specify the separation character using the argument `sep`. Here, the argument `parse_dates` is used to format the date column to be of type `datetime` and `index_col` is the way to set some variable as the DataFrame index. You can pass a list of columns to this argument. Using `usecols`, you can define a set of columns in which you are about to perform the analysis rather than loading the whole columns.
+**`df.read_csv()`** is one of the most common Pandas method designed specifically, but not limited to, to read a CSV data source. By default, CSV is separated by comma `,` as the name stands for but sometimes the file comes with different column separation such as `;`, `|`,`\tab`. In such case, you can explicitly specify the separation character using the argument `sep`. Here, the argument `parse_dates` is used to format the date column to be of type `datetime` and `index_col` is the way to set some variable as the DataFrame index. You can pass a list of columns to this argument. Using `usecols`, you can define a set of columns in which you are about to perform the analysis.
 
 <br>
 
-**`head(3)`** shows the top 3 observations. You can specify as many rows as you want.  
-<div>
+**`df.head(3)`** shows the top 3 rows. You can specify as many rows as you want. Without specification, it will give the top 5 rows. 
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
       <th>stop_date</th>
       <th>driver_gender</th>
+      <th>driver_age</th>
       <th>violation</th>
     </tr>
   </thead>
@@ -96,32 +96,153 @@ df.info()
       <th>0</th>
       <td>2005-01-02</td>
       <td>M</td>
+      <td>20.0</td>
       <td>Speeding</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2005-01-18</td>
       <td>M</td>
+      <td>40.0</td>
       <td>Speeding</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2005-01-23</td>
       <td>M</td>
+      <td>33.0</td>
       <td>Speeding</td>
     </tr>
   </tbody>
 </table>
-</div>
 
 <br>
 
-**`dtypes`** lists the variable data type. By default, Pandas grabs `string` data type as `object` and numerical values are of type either `float` or `int`, unless explicitly predefined as the case over here. The column `stop_date` was pased while loading the dataset therefore this variable become of type `datetime`.
+**`df.info()`** will trough us some important properties of the entire dataset. By specifying `memory_usage='deep'` it will introspect and return the exact amount of memory consumption. 
+
+```shell 
+  RangeIndex: 91741 entries, 0 to 91740
+  Data columns (total 4 columns):
+    #   Column         Non-Null Count  Dtype         
+  ---  ------         --------------  -----         
+    0   stop_date      91741 non-null  datetime64[ns]
+    1   driver_gender  86406 non-null  object        
+    2   driver_age     86120 non-null  float64       
+    3   violation      86408 non-null  object        
+  dtypes: datetime64[ns](1), float64(1), object(2)
+  memory usage: 12.0 MB
+```
 
 <br> 
 
+**`df.dropna().describe()`** is a way to get a quick summary of statistics for each column. `include=[np.number, np.datetime64, np.object]` filters out the columns by the dtypes and by default, it includes all the columns. Therefore, it doesn't have any effect in this case as all the dataset dtypes are including in the list. We can notice that some of the outputs are `NaN` and that is so because properties are dtypes dependent. Some properties that can apply to object data cannot apply to other data types and vice-versa.
 
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stop_date</th>
+      <th>driver_gender</th>
+      <th>driver_age</th>
+      <th>violation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>86113</td>
+      <td>86113</td>
+      <td>86113.000000</td>
+      <td>86113</td>
+    </tr>
+    <tr>
+      <th>unique</th>
+      <td>3767</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td>2012-02-28 00:00:00</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>Speeding</td>
+    </tr>
+    <tr>
+      <th>freq</th>
+      <td>64</td>
+      <td>62649</td>
+      <td>NaN</td>
+      <td>48359</td>
+    </tr>
+    <tr>
+      <th>first</th>
+      <td>2005-01-02 00:00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>last</th>
+      <td>2015-12-31 00:00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>34.011868</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>12.738786</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>15.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>23.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>31.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>43.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>99.000000</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
 
+<br>
 
 {{< /admonition >}} 
 

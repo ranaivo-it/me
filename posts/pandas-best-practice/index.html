@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/"
-        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  798 ,
+        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  997 ,
         "url": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/","datePublished": "2020-09-27T01:46:24+05:30","dateModified": "2020-09-28T15:58:26+08:00","publisher": {
             "@type": "Organization",
             "name": "Mahery Ranaivoson"},"author": {
@@ -93,8 +93,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Pandas Best Practices</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://ranaivo-it.github.io/me/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mahery Ranaivoson</a></span>&nbsp;<span class="post-category">included in <a href="https://ranaivo-it.github.io/me/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;798 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;997 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="https://ranaivo-it.github.io/me/svg/loading.min.svg"
@@ -215,6 +215,74 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 <p>This is the first essential tasks that you would perform before getting started your analysis. Understanding the dataset may extend from knowing what&rsquo;s inside, its content, its shape, the variable names, the variable datatypes, the ratio of null values, or going deeper to know the number of unique values of categorical variables, or even gather the descriptive statistics or the variable distribution. The following code snippet shows a few essential functions along with the must to know arguments to answer these questions.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/police_project.csv&#39;</span><span class="p">,</span> 
+                 <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> 
+                 <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">],</span>
+                 <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">,</span> <span class="s1">&#39;driver_gender&#39;</span><span class="p">,</span><span class="s1">&#39;driver_age_raw&#39;</span><span class="p">,</span> <span class="s1">&#39;violation&#39;</span><span class="p">])</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">memory_usage</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">object</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="details admonition question">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw"></i>Output<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><strong><code>df.read_csv()</code></strong> is one of the most common Pandas method designed specifically, but not limited to, to read a CSV data source. By default, CSV is separated by comma <code>,</code> as the name stands for but sometimes the file comes with different column separation such as <code>;</code>, <code>|</code>,<code>\tab</code>. In such case, you can explicitly specify the separation character using the argument <code>sep</code>. Here, the argument <code>parse_dates</code> is used to format the date column to be of type <code>datetime</code> and <code>index_col</code> is the way to set some variable as the DataFrame index. You can pass a list of columns to this argument. Using <code>usecols</code>, you can define a set of columns in which you are about to perform the analysis.</p>
+<br>
+<p><strong><code>df.head(3)</code></strong> shows the top 3 rows. You can specify as many rows as you want. Without specification, it will give the top 5 rows.</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stop_date</th>
+      <th>driver_gender</th>
+      <th>driver_age</th>
+      <th>violation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2005-01-02</td>
+      <td>M</td>
+      <td>20.0</td>
+      <td>Speeding</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2005-01-18</td>
+      <td>M</td>
+      <td>40.0</td>
+      <td>Speeding</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2005-01-23</td>
+      <td>M</td>
+      <td>33.0</td>
+      <td>Speeding</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<p><strong><code>df.info()</code></strong> will trough us some important properties of the entire dataset. By specifying <code>memory_usage='deep'</code> it will introspect and return the exact amount of memory consumption.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
@@ -227,61 +295,125 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;police_project.csv&#39;</span><span class="p">,</span> 
-                 <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> 
-                 <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">],</span>
-                 <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                 <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">,</span> <span class="s1">&#39;driver_gender&#39;</span><span class="p">,</span> <span class="s1">&#39;violation&#39;</span><span class="p">])</span>
-
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
-<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<pre class="chroma"><code class="language-shell" data-lang="shell">  RangeIndex: <span class="m">91741</span> entries, <span class="m">0</span> to <span class="m">91740</span>
+  Data columns <span class="o">(</span>total <span class="m">4</span> columns<span class="o">)</span>:
+    <span class="c1">#   Column         Non-Null Count  Dtype         </span>
+  ---  ------         --------------  -----         
+    <span class="m">0</span>   stop_date      <span class="m">91741</span> non-null  datetime64<span class="o">[</span>ns<span class="o">]</span>
+    <span class="m">1</span>   driver_gender  <span class="m">86406</span> non-null  object        
+    <span class="m">2</span>   driver_age     <span class="m">86120</span> non-null  float64       
+    <span class="m">3</span>   violation      <span class="m">86408</span> non-null  object        
+  dtypes: datetime64<span class="o">[</span>ns<span class="o">](</span>1<span class="o">)</span>, float64<span class="o">(</span>1<span class="o">)</span>, object<span class="o">(</span>2<span class="o">)</span>
+  memory usage: 12.0 MB
 </code></pre></td></tr></table>
 </div>
-</div><div class="details admonition question">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-question-circle fa-fw"></i>Output<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><strong><code>read_csv()</code></strong> is one of the most common Pandas method designed specifically, but not limited to, to read a CSV data source. By default, CSV is separated by comma <code>,</code> as the name stands for but sometimes the file comes with different column separation such as <code>;</code>, <code>|</code>,<code>\tab</code>. In such case, you can explicitly specify the separation character using the argument <code>sep</code>. Here, the argument <code>parse_dates</code> is used to format the date column to be of type <code>datetime</code> and <code>index_col</code> is the way to set some variable as the DataFrame index. You can pass a list of columns to this argument. Using <code>usecols</code>, you can define a set of columns in which you are about to perform the analysis rather than loading the whole columns.</p>
-<br>
-<p><strong><code>head(3)</code></strong> shows the top 3 observations. You can specify as many rows as you want.</p>
-<div>
+</div><br> 
+<p><strong><code>df.dropna().describe()</code></strong> is a way to get a quick summary of statistics for each column. <code>include=[np.number, np.datetime64, np.object]</code> filters out the columns by the dtypes and by default, it includes all the columns. Therefore, it doesn&rsquo;t have any effect in this case as all the dataset dtypes are including in the list. We can notice that some of the outputs are <code>NaN</code> and that is so because properties are dtypes dependent. Some properties that can apply to object data cannot apply to other data types and vice-versa.</p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
       <th>stop_date</th>
       <th>driver_gender</th>
+      <th>driver_age</th>
       <th>violation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>2005-01-02</td>
+      <th>count</th>
+      <td>86113</td>
+      <td>86113</td>
+      <td>86113.000000</td>
+      <td>86113</td>
+    </tr>
+    <tr>
+      <th>unique</th>
+      <td>3767</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td>2012-02-28 00:00:00</td>
       <td>M</td>
+      <td>NaN</td>
       <td>Speeding</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>2005-01-18</td>
-      <td>M</td>
-      <td>Speeding</td>
+      <th>freq</th>
+      <td>64</td>
+      <td>62649</td>
+      <td>NaN</td>
+      <td>48359</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>2005-01-23</td>
-      <td>M</td>
-      <td>Speeding</td>
+      <th>first</th>
+      <td>2005-01-02 00:00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>last</th>
+      <td>2015-12-31 00:00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>34.011868</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>12.738786</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>15.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>23.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>31.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>43.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>99.000000</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
-</div>
 <br>
-<p><strong><code>dtypes</code></strong> lists the variable data type. By default, Pandas grabs <code>string</code> data type as <code>object</code> and numerical values are of type either <code>float</code> or <code>int</code>, unless explicitly predefined as the case over here. The column <code>stop_date</code> was pased while loading the dataset therefore this variable become of type <code>datetime</code>.</p>
-<br> 
 </div>
         </div>
     </div></div><div class="post-footer" id="post-footer">
