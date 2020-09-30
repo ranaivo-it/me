@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/"
-        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  996 ,
+        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  1014 ,
         "url": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/","datePublished": "2020-09-27T01:46:24+05:30","dateModified": "2020-09-28T15:58:26+08:00","publisher": {
             "@type": "Organization",
             "name": "Mahery Ranaivoson"},"author": {
@@ -93,7 +93,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Pandas Best Practices</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://ranaivo-it.github.io/me/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mahery Ranaivoson</a></span>&nbsp;<span class="post-category">included in <a href="https://ranaivo-it.github.io/me/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;996 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1014 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -130,6 +130,16 @@
         </div>
     </div>
 <h2 id="what-is-pandas">What is Pandas?</h2>
+<figure><a class="lightgallery" href="https://ranaivo-it.github.io/me/posts/pandas-best-practice/not_pandas.jpg" title="credit: www.unsplash.com" data-thumbnail="/posts/pandas-best-practice/not_pandas.jpg" data-sub-html="<h2>This is not a Panda or the Pandas I&rsquo;m talking about.</h2><p>credit: www.unsplash.com</p>">
+        <img
+            class="lazyload"
+            src="https://ranaivo-it.github.io/me/svg/loading.min.svg"
+            data-src="https://ranaivo-it.github.io/me/posts/pandas-best-practice/not_pandas.jpg"
+            data-srcset="https://ranaivo-it.github.io/me/posts/pandas-best-practice/not_pandas.jpg, https://ranaivo-it.github.io/me/posts/pandas-best-practice/not_pandas.jpg 1.5x, https://ranaivo-it.github.io/me/posts/pandas-best-practice/not_pandas.jpg 2x"
+            data-sizes="auto"
+            alt="/posts/pandas-best-practice/not_pandas.jpg" />
+    </a><figcaption class="image-caption">This is not a Panda or the Pandas I&rsquo;m talking about.</figcaption>
+    </figure>
 <p><strong><a href="https://pandas.pydata.org/docs/getting_started/index.html" target="_blank" rel="noopener noreffer">Pandas</a></strong> is one of the most-used standard Python library when dealing with matrix-like transformable datasets which range from a simple tabular to a more complex structure dataset. It is an open-source library providing faster, flexible, and expressive mean for data manipulation and one of the essential to learn library in case you are getting in the data science field.<br>
 Mainly, it provides two well-suited data structures to multiple data type include <strong>Series</strong> and <strong>DataFrame</strong>. This article will get into how to use both of them and the case on which one may be helpful over the other in the following.</p>
 <h2 id="installation">Installation</h2>
@@ -153,16 +163,13 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </div>
 </div><h2 id="pandas-components">Pandas components</h2>
 <p>As mentioned earlier and to handle different types of datasets, pandas provides 2 data structures mainly wrapped over Numpy. <code>Series</code> is nothing but one dimension representation similar to the Numpy array but structured in the way it is explicitly associate an index with the values. Whereas <code>DataFrame</code> is a multi-dimensional array that can be thought of as a collection of series and its rows are also indexed by default unless it is explicitly done. They are pretty similar in terms of operations as one can apply almost the same manipulation to both of them.</p>
-<p><figure><a class="lightgallery" href="https://ranaivo-it.github.io/me/posts/pandas-best-practice/pandas_main_comps.png" title="Image credit: www.learndatasci.com" data-thumbnail="/posts/pandas-best-practice/pandas_main_comps.png" data-sub-html="<h2>Pandas main components</h2><p>Image credit: www.learndatasci.com</p>">
-        <img
-            class="lazyload"
-            src="https://ranaivo-it.github.io/me/svg/loading.min.svg"
-            data-src="https://ranaivo-it.github.io/me/posts/pandas-best-practice/pandas_main_comps.png"
-            data-srcset="https://ranaivo-it.github.io/me/posts/pandas-best-practice/pandas_main_comps.png, https://ranaivo-it.github.io/me/posts/pandas-best-practice/pandas_main_comps.png 1.5x, https://ranaivo-it.github.io/me/posts/pandas-best-practice/pandas_main_comps.png 2x"
-            data-sizes="auto"
-            alt="/posts/pandas-best-practice/pandas_main_comps.png" />
-    </a><figcaption class="image-caption">Pandas main components</figcaption>
-    </figure></p>
+<figure>
+    <img src="https://ranaivo-it.github.io/me/posts/pandas-best-practice/pandas_main_comps.png"
+         alt="credit: www.learndatasci.com" width="600" height="500"/> <figcaption>
+            <h4>Pandas main components</h4>
+        </figcaption>
+</figure>
+
 <h2 id="dataset">Dataset</h2>
 <p>The dataset being used in the following is either being created manually or loaded from Seaborn repository or the <strong><a href="https://www.kaggle.com/faressayah/stanford-open-policing-project/notebooks" target="_blank" rel="noopener noreffer">Traffic and Pedestrian Stops</a></strong> by the Police in Rhode Island to make advanced operations. The choice lies in the fact that this dataset has multiple data types from which multiple scenarios can be derived.</p>
 <h2 id="best-practices">Best practices</h2>
@@ -237,7 +244,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">object</span><span class="p">])</span>
 </code></pre></td></tr></table>
 </div>
-</div><div class="details admonition question">
+</div><div class="details admonition question open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-question-circle fa-fw"></i>Output<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>

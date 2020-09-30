@@ -9,6 +9,8 @@ This article provides a collection of the daily best practices and use cases of 
 <!--more-->
 
 ## What is Pandas?
+{{< image src="/posts/pandas-best-practice/not_pandas.jpg" caption="This is not a Panda or the Pandas I'm talking about." title="credit: www.unsplash.com">}}
+
 **[Pandas](https://pandas.pydata.org/docs/getting_started/index.html)** is one of the most-used standard Python library when dealing with matrix-like transformable datasets which range from a simple tabular to a more complex structure dataset. It is an open-source library providing faster, flexible, and expressive mean for data manipulation and one of the essential to learn library in case you are getting in the data science field.<br> 
 Mainly, it provides two well-suited data structures to multiple data type include **Series** and **DataFrame**. This article will get into how to use both of them and the case on which one may be helpful over the other in the following.
 
@@ -26,7 +28,7 @@ conda install pandas
 ## Pandas components
 As mentioned earlier and to handle different types of datasets, pandas provides 2 data structures mainly wrapped over Numpy. `Series` is nothing but one dimension representation similar to the Numpy array but structured in the way it is explicitly associate an index with the values. Whereas `DataFrame` is a multi-dimensional array that can be thought of as a collection of series and its rows are also indexed by default unless it is explicitly done. They are pretty similar in terms of operations as one can apply almost the same manipulation to both of them. 
 
-![Image credit: www.learndatasci.com](/posts/pandas-best-practice/pandas_main_comps.png "Pandas main components")
+{{< figure src="/posts/pandas-best-practice/pandas_main_comps.png" title="Pandas main components" alt="credit: www.learndatasci.com" height="500" width="600">}}
 
 
 ## Dataset
@@ -74,13 +76,13 @@ df.info(memory_usage='deep')
 df.dropna().describe(include=[np.number, np.datetime64, np.object])
 ```
 
-{{< admonition type=question title="Output" open=false >}}
+{{< admonition type=question title="Output" open=true >}}
+
 **`df.read_csv()`** is one of the most common Pandas method designed specifically, but not limited to, to read a CSV data source. By default, CSV is separated by comma `,` as the name stands for but sometimes the file comes with different column separation such as `;`, `|`,`\tab`. In such case, you can explicitly specify the separation character using the argument `sep`. Here, the argument `parse_dates` is used to format the date column to be of type `datetime` and `index_col` is the way to set some variable as the DataFrame index. You can pass a list of columns to this argument. Using `usecols`, you can define a set of columns in which you are about to perform the analysis.
 
 <br>
 
 **`df.head(3)`** shows the top 3 rows. You can specify as many rows as you want. Without specification, it will give the top 5 rows. 
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -119,7 +121,6 @@ df.dropna().describe(include=[np.number, np.datetime64, np.object])
 <br>
 
 **`df.info()`** will trough us some important properties of the entire dataset. By specifying `memory_usage='deep'` it will introspect and return the exact amount of memory consumption. 
-
 ```shell 
   RangeIndex: 91741 entries, 0 to 91740
   Data columns (total 4 columns):
@@ -136,7 +137,6 @@ df.dropna().describe(include=[np.number, np.datetime64, np.object])
 <br> 
 
 **`df.dropna().describe()`** is a way to get a quick summary of statistics of each column. `include=[np.number, np.datetime64, np.object]` filters out columns by data types and by default it includes all the columns. Therefore, it doesn't have any effect in this case as all the dataset dtypes are including in the list. We can notice that some of the outputs are `NaN` and that is so because properties are dtypes dependent. Some properties that can apply to object data cannot apply to other data types and vice-versa.
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
