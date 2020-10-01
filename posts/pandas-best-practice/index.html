@@ -10,8 +10,8 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ranaivo-it.github.io/me/posts/pandas-best-practice/" />
 <meta property="og:image" content="https://ranaivo-it.github.io/images/twitter-card.png"/>
-<meta property="article:published_time" content="2020-09-27T01:46:24+05:30" />
-<meta property="article:modified_time" content="2020-09-28T15:58:26+08:00" />
+<meta property="article:published_time" content="2020-09-27T01:46:24+02:00" />
+<meta property="article:modified_time" content="2020-10-01T15:58:26+02:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://ranaivo-it.github.io/images/twitter-card.png"/>
 
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/"
-        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  1115 ,
-        "url": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/","datePublished": "2020-09-27T01:46:24+05:30","dateModified": "2020-09-28T15:58:26+08:00","publisher": {
+        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  1452 ,
+        "url": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/","datePublished": "2020-09-27T01:46:24+02:00","dateModified": "2020-10-01T15:58:26+02:00","publisher": {
             "@type": "Organization",
             "name": "Mahery Ranaivoson"},"author": {
                 "@type": "Person",
@@ -93,8 +93,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Pandas Best Practices</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://ranaivo-it.github.io/me/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mahery Ranaivoson</a></span>&nbsp;<span class="post-category">included in <a href="https://ranaivo-it.github.io/me/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1115 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;6 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1452 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="https://ranaivo-it.github.io/me/svg/loading.min.svg"
@@ -118,6 +118,7 @@
         <li><a href="#1-importing-necessary-libraries">1. Importing necessary libraries</a></li>
         <li><a href="#2-get-to-know-the-dataset">2. Get to know the dataset</a></li>
         <li><a href="#3-generate-data-sample-and-rename-column">3. Generate data sample and rename column</a></li>
+        <li><a href="#4-reverse-row-and-column-order">4. Reverse row and column order</a></li>
       </ul>
     </li>
   </ul>
@@ -127,7 +128,7 @@
             <i class="icon fas fa-info-circle fa-fw"></i>What is this article about?<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content">This article provides a collection of the daily best practices and use cases of the Pandas library. It is meant to be a rolling release note by which I will mark down all of the better practice I came across along my journey towards data science.</div>
+            <div class="admonition-content">This article provides a collection of the daily best practices and use cases of the Pandas library. It is meant to be a rolling release note by which I will mark down all of the better practice I came across along my journey towards data science. Accordingly, the list is going to be (very) long overnight thus feel free to use the table of content to jump over to the topic you may interest.</div>
         </div>
     </div>
 <h2 id="what-is-pandas">What is Pandas?</h2>
@@ -223,15 +224,16 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 <p>This is the first essential tasks that you would perform before getting started your analysis. Understanding the dataset may extend from knowing what&rsquo;s inside, its content, its shape, the variable names, the variable datatypes, the ratio of null values, or going deeper to know the number of unique values of categorical variables, or even gather the descriptive statistics or the variable distribution. The following code snippet shows a few essential functions along with the must to know arguments to answer these questions.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">police</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/police_project.csv&#39;</span><span class="p">,</span> 
@@ -243,6 +245,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 <span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">police</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">memory_usage</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">)</span>
 <span class="n">police</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">object</span><span class="p">])</span>
+<span class="n">police</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="details admonition question">
@@ -250,7 +253,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
             <i class="icon fas fa-question-circle fa-fw"></i>Output<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content"><p><strong><code>df.read_csv()</code></strong> is one of the most common Pandas method designed specifically, but not limited to, to read a CSV data source. By default, CSV is separated by comma <code>,</code> as the name stands for but sometimes the file comes with different column separation such as <code>;</code>, <code>|</code>,<code>\tab</code>. In such case, you can explicitly specify the separation character using the argument <code>sep</code>. Here, the argument <code>parse_dates</code> is used to format the date column to be of type <code>datetime</code> and <code>index_col</code> is the way to set some variable as the DataFrame index. You can pass a list of columns to this argument. Using <code>usecols</code>, you can define a set of columns in which you are about to perform the analysis.</p>
+            <div class="admonition-content"><p><strong><code>df.read_csv()</code></strong> is one of the most common Pandas method designed specifically, but not limited to, to read a CSV data source. By default, CSV columns are separated by comma <code>,</code> as the name stands for but sometimes the data source comes with different column character separation such as <code>;</code>, <code>|</code>,<code>\tab</code>. In such case, you can explicitly specify the separation character using the argument <code>sep</code>. Here, the argument <code>parse_dates</code> is used to format the date column to be of type <code>datetime</code> and <code>index_col</code> is the way to set some variable as the DataFrame index. You can pass a list of columns to this argument. Using <code>usecols</code>, you can define a set of columns in which you are about to perform the analysis.</p>
 <br>
 <p><strong><code>df.head(3)</code></strong> shows the top 3 rows. You can specify as many rows as you want. Without specification, it will give the top 5 rows.</p>
 <table border="1" class="dataframe">
@@ -316,24 +319,24 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </code></pre></td></tr></table>
 </div>
 </div><br> 
-<p><strong><code>df.dropna().describe()</code></strong> is a way to get a quick summary of statistics of each column. <code>include=[np.number, np.datetime64, np.object]</code> filters out columns by data types and by default it includes all the columns. Therefore, it doesn&rsquo;t have any effect in this case as all the dataset dtypes are including in the list. We can notice that some of the outputs are <code>NaN</code> and that is so because properties are dtypes dependent. Some properties that can apply to object data cannot apply to other data types and vice-versa.</p>
+<p><strong><code>dropna().describe()</code></strong> and <strong><code>dropna().select_dtypes().describe()</code></strong> are two way to get a quick summary of statistics by filtering columns by data types. <code>include=[np.number, np.datetime64, np.object]</code> and <code>select_dtypes(include=['number'])</code> filter out columns by data types and by default the first one will include all the columns whereas the second will through an error as <code>select_dtypes()</code> required at least one parameter. The first doesn&rsquo;t have any effect in this case as all the dataset dtypes are including in the list whereas the second only outputs column number of type <code>number</code> which is here <code>driver_age_raw</code>. We can notice from the first output that some of the outputs are <code>NaN</code> and that is so because properties are dtypes dependent. Some properties that can apply to object data cannot apply to other data types and vice-versa.</p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
       <th>stop_date</th>
       <th>driver_gender</th>
-      <th>driver_age</th>
+      <th>driver_age_raw</th>
       <th>violation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>count</th>
-      <td>86113</td>
-      <td>86113</td>
-      <td>86113.000000</td>
-      <td>86113</td>
+      <td>86405</td>
+      <td>86405</td>
+      <td>86405.000000</td>
+      <td>86405</td>
     </tr>
     <tr>
       <th>unique</th>
@@ -352,9 +355,9 @@ Mainly, it provides two well-suited data structures to multiple data type includ
     <tr>
       <th>freq</th>
       <td>64</td>
-      <td>62649</td>
+      <td>62895</td>
       <td>NaN</td>
-      <td>48359</td>
+      <td>48461</td>
     </tr>
     <tr>
       <th>first</th>
@@ -374,50 +377,92 @@ Mainly, it provides two well-suited data structures to multiple data type includ
       <th>mean</th>
       <td>NaN</td>
       <td>NaN</td>
-      <td>34.011868</td>
+      <td>1970.536080</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>std</th>
       <td>NaN</td>
       <td>NaN</td>
-      <td>12.738786</td>
+      <td>110.514739</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>min</th>
       <td>NaN</td>
       <td>NaN</td>
-      <td>15.000000</td>
+      <td>0.000000</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>25%</th>
       <td>NaN</td>
       <td>NaN</td>
-      <td>23.000000</td>
+      <td>1967.000000</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>50%</th>
       <td>NaN</td>
       <td>NaN</td>
-      <td>31.000000</td>
+      <td>1980.000000</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>75%</th>
       <td>NaN</td>
       <td>NaN</td>
-      <td>43.000000</td>
+      <td>1987.000000</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>max</th>
       <td>NaN</td>
       <td>NaN</td>
-      <td>99.000000</td>
+      <td>8801.000000</td>
       <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>driver_age_raw</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>86414.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>1970.491228</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>110.914909</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1967.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>1980.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>1987.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>8801.000000</td>
     </tr>
   </tbody>
 </table>
@@ -436,6 +481,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="c1"># Create a dataframe and rename columns </span>
@@ -445,13 +491,227 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 <span class="c1"># Eg. 2</span>
 <span class="n">bar</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcde&#39;</span><span class="p">))</span>
 <span class="n">bar</span><span class="o">.</span><span class="n">add_prefix</span><span class="p">(</span><span class="s1">&#39;X_&#39;</span><span class="p">)</span>
+<span class="c1"># </span>
 </code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><div class="details admonition question">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw"></i>Output<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Here we have 2 different ways to create DataFrame and later renaming columns. The first will create a 2 columns and 2 rows DataFrame then renames the column names using the function <code>rename()</code>.</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>col_one</th>
+      <th>col_two</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>300</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<p>The second consists of constructing random samples and names columns after the list passed over the <code>columns</code> attribute then prefixes these names using the method <code>add_prefix()</code></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>X_a</th>
+      <th>X_b</th>
+      <th>X_c</th>
+      <th>X_d</th>
+      <th>X_e</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.226161</td>
+      <td>0.588816</td>
+      <td>0.335782</td>
+      <td>0.866124</td>
+      <td>0.274059</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.364500</td>
+      <td>0.021647</td>
+      <td>0.243754</td>
+      <td>0.628392</td>
+      <td>0.124118</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.507057</td>
+      <td>0.769180</td>
+      <td>0.364644</td>
+      <td>0.246468</td>
+      <td>0.716658</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.865142</td>
+      <td>0.201212</td>
+      <td>0.165379</td>
+      <td>0.397729</td>
+      <td>0.195590</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+        </div>
+    </div>
+<h3 id="4-reverse-row-and-column-order">4. Reverse row and column order</h3>
+<p>These are basic operations which consist of reversing the original order of the DataFrame row-wise or column-wise. Here, <code>reset_index()</code> is used to drop the old index and create a new one starting from 0. We can notice the difference between the first and the second output table.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="c1"># Reverse rows</span>
+<span class="n">police</span><span class="o">.</span><span class="n">loc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># Reverse rows and drop the old index </span>
+<span class="n">police</span><span class="o">.</span><span class="n">loc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># Reverse columns</span>
+<span class="n">police</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="details admonition question">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw"></i>Output<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><code>police.loc[::-1, :].head(3)</code></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stop_date</th>
+      <th>driver_gender</th>
+      <th>driver_age_raw</th>
+      <th>violation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>91740</th>
+      <td>2015-12-31</td>
+      <td>M</td>
+      <td>1959.0</td>
+      <td>Speeding</td>
+    </tr>
+    <tr>
+      <th>91739</th>
+      <td>2015-12-31</td>
+      <td>M</td>
+      <td>1993.0</td>
+      <td>Speeding</td>
+    </tr>
+    <tr>
+      <th>91738</th>
+      <td>2015-12-31</td>
+      <td>M</td>
+      <td>1992.0</td>
+      <td>Moving violation</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<p><code>police.loc[::-1, :].reset_index(drop=True).head(3)</code></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stop_date</th>
+      <th>driver_gender</th>
+      <th>driver_age_raw</th>
+      <th>violation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2015-12-31</td>
+      <td>M</td>
+      <td>1959.0</td>
+      <td>Speeding</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2015-12-31</td>
+      <td>M</td>
+      <td>1993.0</td>
+      <td>Speeding</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2015-12-31</td>
+      <td>M</td>
+      <td>1992.0</td>
+      <td>Moving violation</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<p><code>police.loc[:, ::-1].head(3)</code></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>violation</th>
+      <th>driver_age_raw</th>
+      <th>driver_gender</th>
+      <th>stop_date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Speeding</td>
+      <td>1985.0</td>
+      <td>M</td>
+      <td>2005-01-02</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Speeding</td>
+      <td>1965.0</td>
+      <td>M</td>
+      <td>2005-01-18</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Speeding</td>
+      <td>1972.0</td>
+      <td>M</td>
+      <td>2005-01-23</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+</div>
+        </div>
+    </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on Sep 28, 2020</span>
+                <span>Updated on Oct 1, 2020</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -487,5 +747,5 @@ Mainly, it provides two well-suited data structures to multiple data type includ
             </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="https://ranaivo-it.github.io/me/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="https://ranaivo-it.github.io/me/lib/katex/katex.min.css"><link rel="stylesheet" href="https://ranaivo-it.github.io/me/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="https://ranaivo-it.github.io/me/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="https://www-naivo-net.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/katex/katex.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"twemoji":true};</script><script type="text/javascript" src="https://ranaivo-it.github.io/me/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="https://ranaivo-it.github.io/me/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="https://ranaivo-it.github.io/me/lib/katex/katex.min.css"><link rel="stylesheet" href="https://ranaivo-it.github.io/me/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="https://ranaivo-it.github.io/me/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=Array.prototype.fill%2CArray.prototype.find%2CArray.from%2CIntersectionObserver%2CMath.sign%2CObject.assign%2CPromise%2CObject.entries%2CElement.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2Chtml5shiv%2CObject.values%2Cfetch%2CElement.prototype.after"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/object-fit-images/ofi.min.js"></script><script type="text/javascript" src="https://www-naivo-net.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/katex/katex.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="https://ranaivo-it.github.io/me/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"twemoji":true};</script><script type="text/javascript" src="https://ranaivo-it.github.io/me/js/theme.min.js"></script></body>
 </html>
