@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/"
-        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  1014 ,
+        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  1115 ,
         "url": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/","datePublished": "2020-09-27T01:46:24+05:30","dateModified": "2020-09-28T15:58:26+08:00","publisher": {
             "@type": "Organization",
             "name": "Mahery Ranaivoson"},"author": {
@@ -93,8 +93,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Pandas Best Practices</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://ranaivo-it.github.io/me/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mahery Ranaivoson</a></span>&nbsp;<span class="post-category">included in <a href="https://ranaivo-it.github.io/me/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1014 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1115 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="https://ranaivo-it.github.io/me/svg/loading.min.svg"
@@ -117,6 +117,7 @@
       <ul>
         <li><a href="#1-importing-necessary-libraries">1. Importing necessary libraries</a></li>
         <li><a href="#2-get-to-know-the-dataset">2. Get to know the dataset</a></li>
+        <li><a href="#3-generate-data-sample-and-rename-column">3. Generate data sample and rename column</a></li>
       </ul>
     </li>
   </ul>
@@ -233,15 +234,15 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/police_project.csv&#39;</span><span class="p">,</span> 
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">police</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/police_project.csv&#39;</span><span class="p">,</span> 
                  <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> 
                  <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">],</span>
                  <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">,</span> <span class="s1">&#39;driver_gender&#39;</span><span class="p">,</span><span class="s1">&#39;driver_age_raw&#39;</span><span class="p">,</span> <span class="s1">&#39;violation&#39;</span><span class="p">])</span>
 
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">memory_usage</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">object</span><span class="p">])</span>
+<span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">police</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">memory_usage</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">)</span>
+<span class="n">police</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">object</span><span class="p">])</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="details admonition question">
@@ -423,7 +424,30 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 <br>
 </div>
         </div>
-    </div></div><div class="post-footer" id="post-footer">
+    </div>
+<h3 id="3-generate-data-sample-and-rename-column">3. Generate data sample and rename column</h3>
+<p>Generating samples may help in some situations like conducting an experiment, for instance, testing algorithms, making visualization to better understand changes over your experiment, and so on. There are several ways of generating samples for any purpose but the following made use of Pandas and Numpy to make it simple.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="c1"># Create a dataframe and rename columns </span>
+<span class="c1"># Eg. 1</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Col One&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="s1">&#39;Col Two&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">]})</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;Col One&#39;</span><span class="p">:</span> <span class="s1">&#39;col_one&#39;</span><span class="p">,</span> <span class="s1">&#39;Col Two&#39;</span><span class="p">:</span> <span class="s1">&#39;col_two&#39;</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Eg. 2</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcde&#39;</span><span class="p">))</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">add_prefix</span><span class="p">(</span><span class="s1">&#39;X_&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

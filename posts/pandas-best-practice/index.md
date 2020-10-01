@@ -65,15 +65,15 @@ pd.set_option('display.max_columns', None)
 This is the first essential tasks that you would perform before getting started your analysis. Understanding the dataset may extend from knowing what's inside, its content, its shape, the variable names, the variable datatypes, the ratio of null values, or going deeper to know the number of unique values of categorical variables, or even gather the descriptive statistics or the variable distribution. The following code snippet shows a few essential functions along with the must to know arguments to answer these questions.   
 
 ```Python 
-df = pd.read_csv('datasets/police_project.csv', 
+police = pd.read_csv('datasets/police_project.csv', 
                  sep=',', 
                  parse_dates=['stop_date'],
                  index_col=None,
                  usecols=['stop_date', 'driver_gender','driver_age_raw', 'violation'])
 
-df.head(3)
-df.info(memory_usage='deep')
-df.dropna().describe(include=[np.number, np.datetime64, np.object])
+police.head(3)
+police.info(memory_usage='deep')
+police.dropna().describe(include=[np.number, np.datetime64, np.object])
 ```
 
 {{< admonition type=question title="Output" open=false >}}
@@ -245,6 +245,22 @@ df.dropna().describe(include=[np.number, np.datetime64, np.object])
 <br>
 
 {{< /admonition >}} 
+
+### 3. Generate data sample and rename column
+Generating samples may help in some situations like conducting an experiment, for instance, testing algorithms, making visualization to better understand changes over your experiment, and so on. There are several ways of generating samples for any purpose but the following made use of Pandas and Numpy to make it simple.    
+
+```Python
+# Create a dataframe and rename columns 
+# Eg. 1
+foo = pd.DataFrame({'Col One': [100, 200], 'Col Two': [300, 400]})
+foo.rename({'Col One': 'col_one', 'Col Two': 'col_two'}, axis=1, inplace=True)
+# Eg. 2
+bar = pd.DataFrame(np.random.rand(4, 5), columns=list('abcde'))
+bar.add_prefix('X_')
+```
+
+
+
 
 
 
