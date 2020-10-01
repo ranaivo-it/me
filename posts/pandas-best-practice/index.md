@@ -4,7 +4,7 @@
 
 {{< admonition type=info title="What is this article about?" open=true >}}
 
-This article provides a collection of the daily best practices and use cases of the Pandas library. It is meant to be a rolling release note by which I will mark down all of the better practice I came across along my journey towards data science. Accordingly, the list is going to be (very) long overnight thus feel free to use the table of content to jump over to the topic you may interest.
+This article provides a collection of the daily best practices and use cases of the Pandas library. It is meant to be a rolling release note by which I will mark down all of the better practice I came across along my journey towards data science. Accordingly, the list is going to be (very) long thus feel free to use the table of content to jump over to the topic you may interest.
 
 {{< /admonition >}}
 
@@ -295,8 +295,8 @@ police.select_dtypes(include=['number', 'object']).describe()
 
 {{< /admonition >}} 
 
-### 3. Generate data sample and rename column
-Generating samples may help in some situations like conducting an experiment, for instance, testing algorithms, making visualization to better understand changes over your experiment, and so on. There are several ways of generating samples for any purpose but the following made use of Pandas and Numpy to make it simple.    
+### 3. Generate data sample and rename columns
+Generating synthetic sample may help us in some situation like conducting an experiment, for instance, testing algorithms, making visualization to better understand changes over your experiment, and so on. There are several ways of generating samples for any purpose but the following made use of Pandas and Numpy to make it simple.    
 
 ```Python
 # Create a dataframe and rename columns 

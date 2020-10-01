@@ -19,7 +19,7 @@
             <i class="icon fas fa-info-circle fa-fw"></i>What is this article about?<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content">This article provides a collection of the daily best practices and use cases of the Pandas library. It is meant to be a rolling release note by which I will mark down all of the better practice I came across along my journey towards data science. Accordingly, the list is going to be (very) long overnight thus feel free to use the table of content to jump over to the topic you may interest.</div>
+            <div class="admonition-content">This article provides a collection of the daily best practices and use cases of the Pandas library. It is meant to be a rolling release note by which I will mark down all of the better practice I came across along my journey towards data science. Accordingly, the list is going to be (very) long thus feel free to use the table of content to jump over to the topic you may interest.</div>
         </div>
     </div>]]></description>
 </item></channel>
