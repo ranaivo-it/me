@@ -533,3 +533,31 @@ police.loc[:, ::-1].head(3)
 
 
 
+
+
+
+
+
+
+
+
+<!--Sources -->
+<!-- 1. https://jakevdp.github.io/PythonDataScienceHandbook/03.08-aggregation-and-grouping.html -->
+<!-- 2. Python Data Science Handbook, ESSENTIAL TOOLS FOR WORKING WITH DATA, Jake VanderPlas -->
+<!-- 3. Pandas Cookbook, Recipes for Scientific Computing, Time Series Analysis and Data Visualization using Python, Theodore Petrou -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
