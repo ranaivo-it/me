@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/"
-        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  1453 ,
+        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  1829 ,
         "url": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/","datePublished": "2020-09-27T01:46:24+02:00","dateModified": "2020-10-01T15:58:26+02:00","publisher": {
             "@type": "Organization",
             "name": "Mahery Ranaivoson"},"author": {
@@ -93,8 +93,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Pandas Best Practices</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://ranaivo-it.github.io/me/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mahery Ranaivoson</a></span>&nbsp;<span class="post-category">included in <a href="https://ranaivo-it.github.io/me/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1453 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;7 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1829 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="https://ranaivo-it.github.io/me/svg/loading.min.svg"
@@ -119,6 +119,7 @@
         <li><a href="#2-get-to-know-the-dataset">2. Get to know the dataset</a></li>
         <li><a href="#3-generate-data-sample-and-rename-columns">3. Generate data sample and rename columns</a></li>
         <li><a href="#4-reverse-row-and-column-order">4. Reverse row and column order</a></li>
+        <li><a href="#5-missing-data">5. Missing data</a></li>
       </ul>
     </li>
   </ul>
@@ -234,6 +235,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
+</span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">police</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/police_project.csv&#39;</span><span class="p">,</span> 
@@ -244,6 +246,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 
 <span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">police</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">memory_usage</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">)</span>
+<span class="c1"># police.columns.to_series().groupby(police.dtypes).groups</span>
 <span class="n">police</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">object</span><span class="p">])</span>
 <span class="n">police</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </code></pre></td></tr></table>
@@ -319,7 +322,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </code></pre></td></tr></table>
 </div>
 </div><br> 
-<p><strong><code>dropna().describe()</code></strong> and <strong><code>dropna().select_dtypes().describe()</code></strong> are two way to get a quick summary of statistics by filtering columns by data types. <code>include=[np.number, np.datetime64, np.object]</code> and <code>select_dtypes(include=['number'])</code> filter out columns by data types and by default the first one will include all the columns whereas the second will through an error as <code>select_dtypes()</code> required at least one parameter. The first doesn&rsquo;t have any effect in this case as all the dataset dtypes are including in the list whereas the second only outputs column number of type <code>number</code> which is here <code>driver_age_raw</code>. We can notice from the first output that some of the outputs are <code>NaN</code> and that is so because properties are dtypes dependent. Some properties that can apply to object data cannot apply to other data types and vice-versa.</p>
+<p><strong><code>dropna().describe()</code></strong> and <strong><code>dropna().select_dtypes().describe()</code></strong> are here used to get a quick summary of statistics by filtered columns by the data types. <code>include=[np.number, np.datetime64, np.object]</code> and <code>select_dtypes(include=['number'])</code> filter out columns by data types and by default the first one will include all the columns whereas the second will through an error as <code>select_dtypes()</code> required at least one parameter. The first doesn&rsquo;t have any effect in this case as all the dataset dtypes are including in the list whereas the second only outputs column number of type <code>number</code> which is here <code>driver_age_raw</code>. To get a quick summary of columns datatypes grouped by columns, you can uncomment the code at the <code>line 9</code>. We can notice from the first output that some of the outputs are <code>NaN</code> and that is so because properties are data types dependent which means those that can apply to object data cannot apply to other data types and vice-versa.</p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -708,10 +711,255 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </div>
         </div>
     </div>
-<!--Sources -->
-<!-- 1. https://jakevdp.github.io/PythonDataScienceHandbook/03.08-aggregation-and-grouping.html -->
-<!-- 2. Python Data Science Handbook, ESSENTIAL TOOLS FOR WORKING WITH DATA, Jake VanderPlas -->
-<!-- 3. Pandas Cookbook, Recipes for Scientific Computing, Time Series Analysis and Data Visualization using Python, Theodore Petrou --></div><div class="post-footer" id="post-footer">
+<h3 id="5-missing-data">5. Missing data</h3>
+<p>Missing data is a common problem that we encounter in our data analysis task. In the machine learning task, one can define missing values as missing information that would bring additional information if they are observed<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. The following method displays the column-wise percentage of missing data along with a pythonic way of getting rid of columns having only missing data followed by a way to filter columns out based on the ratio of missing values.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="c1"># Reload the datset with full features</span>
+<span class="n">police</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/police_project.csv&#39;</span><span class="p">,</span> 
+                 <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> 
+                 <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">],</span>
+                 <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">percent_missing</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="s1">&#39;&#39;&#39;Missing data information summary&#39;&#39;&#39;</span>
+    <span class="n">percent_missing</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;column_name&#39;</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="s1">&#39;percent_missing&#39;</span><span class="p">:</span> <span class="n">percent_missing</span><span class="p">})</span>
+    <span class="n">missing</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;percent_missing&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">missing</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">missing</span>
+
+<span class="k">def</span> <span class="nf">remove_missing</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">keep_ratio</span><span class="o">=.</span><span class="mi">9</span><span class="p">):</span>
+    <span class="s1">&#39;&#39;&#39;Missing data removal&#39;&#39;&#39;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="c1"># The pythonic way of getting rid of columns having only missing values</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&#34;columns&#34;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="c1"># Keep columns having at least 90%(default value of keep_ratio)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">*</span><span class="n">keep_ratio</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+    
+<span class="c1"># Missing data summary </span>
+<span class="n">missing</span> <span class="o">=</span> <span class="n">percent_missing</span><span class="p">(</span><span class="n">police</span><span class="p">)</span>
+<span class="n">missing</span>
+<span class="c1"># Keep columns having at least 90% values</span>
+<span class="n">new_police</span> <span class="o">=</span> <span class="n">remove_missing</span><span class="p">(</span><span class="n">police</span><span class="p">,</span> <span class="o">.</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">new_missing</span> <span class="o">=</span> <span class="n">percent_missing</span><span class="p">(</span><span class="n">new_police</span><span class="p">)</span>
+<span class="n">new_missing</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="details admonition question">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw"></i>Output<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Missing data summary: <code>missing</code></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>features</th>
+      <th>missing %</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>county_name</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>search_type</td>
+      <td>96.52</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>driver_age</td>
+      <td>6.13</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>driver_gender</td>
+      <td>5.82</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>driver_age_raw</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>driver_race</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>violation_raw</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>violation</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>stop_outcome</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>is_arrested</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>stop_duration</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>stop_date</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>stop_time</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>search_conducted</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>drugs_related_stop</td>
+      <td>0.00</td>
+    </tr>
+  </tbody>
+</table>
+<p>Keep columns having at least 90% values: <code>new_missing</code> <br>
+Here we can notice that the features get reduced. The first two columns <code>county_name</code> and <code>search_type</code> have been removed as they held high amount of missing data.</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>features</th>
+      <th>missing %</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>driver_age</td>
+      <td>6.13</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>driver_gender</td>
+      <td>5.82</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>driver_age_raw</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>driver_race</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>violation_raw</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>violation</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>stop_outcome</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>is_arrested</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>stop_duration</td>
+      <td>5.81</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>stop_date</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>stop_time</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>search_conducted</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>drugs_related_stop</td>
+      <td>0.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+        </div>
+    </div>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://towardsdatascience.com/all-about-missing-data-handling-b94b8b5d2184" target="_blank" rel="noopener noreffer">All about missing data handling</a>, by Baijayanta Roy <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
