@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/"
-        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  1831 ,
+        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  1899 ,
         "url": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/","datePublished": "2020-09-27T01:46:24+02:00","dateModified": "2020-10-06T15:58:26+02:00","publisher": {
             "@type": "Organization",
             "name": "Mahery Ranaivoson"},"author": {
@@ -93,7 +93,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Pandas Best Practices</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://ranaivo-it.github.io/me/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mahery Ranaivoson</a></span>&nbsp;<span class="post-category">included in <a href="https://ranaivo-it.github.io/me/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1831 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1899 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -784,7 +784,86 @@ Mainly, it provides two well-suited data structures to multiple data type includ
             <i class="icon fas fa-question-circle fa-fw"></i>Output<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content"><p>Missing data summary: <code>missing</code></p>
+            <div class="admonition-content"><p><code>police</code> dataset</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stop_date</th>
+      <th>stop_time</th>
+      <th>county_name</th>
+      <th>driver_gender</th>
+      <th>driver_age_raw</th>
+      <th>driver_age</th>
+      <th>driver_race</th>
+      <th>violation_raw</th>
+      <th>violation</th>
+      <th>search_conducted</th>
+      <th>search_type</th>
+      <th>stop_outcome</th>
+      <th>is_arrested</th>
+      <th>stop_duration</th>
+      <th>drugs_related_stop</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2005-01-02</td>
+      <td>01:55</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>1985.0</td>
+      <td>20.0</td>
+      <td>White</td>
+      <td>Speeding</td>
+      <td>Speeding</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>Citation</td>
+      <td>False</td>
+      <td>0-15 Min</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2005-01-18</td>
+      <td>08:15</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>1965.0</td>
+      <td>40.0</td>
+      <td>White</td>
+      <td>Speeding</td>
+      <td>Speeding</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>Citation</td>
+      <td>False</td>
+      <td>0-15 Min</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2005-01-23</td>
+      <td>23:15</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>1972.0</td>
+      <td>33.0</td>
+      <td>White</td>
+      <td>Speeding</td>
+      <td>Speeding</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>Citation</td>
+      <td>False</td>
+      <td>0-15 Min</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+<p>Missing data summary: <code>missing</code></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
