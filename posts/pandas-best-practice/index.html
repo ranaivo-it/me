@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://ranaivo-it.github.io/me/posts/pandas-best-practice/" />
 <meta property="og:image" content="https://ranaivo-it.github.io/images/twitter-card.png"/>
 <meta property="article:published_time" content="2020-09-27T01:46:24+02:00" />
-<meta property="article:modified_time" content="2020-10-06T15:58:26+02:00" />
+<meta property="article:modified_time" content="2020-10-11T15:58:26+02:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://ranaivo-it.github.io/images/twitter-card.png"/>
 
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/"
-        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  1899 ,
-        "url": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/","datePublished": "2020-09-27T01:46:24+02:00","dateModified": "2020-10-06T15:58:26+02:00","publisher": {
+        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  2432 ,
+        "url": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/","datePublished": "2020-09-27T01:46:24+02:00","dateModified": "2020-10-11T15:58:26+02:00","publisher": {
             "@type": "Organization",
             "name": "Mahery Ranaivoson"},"author": {
                 "@type": "Person",
@@ -93,8 +93,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Pandas Best Practices</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://ranaivo-it.github.io/me/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mahery Ranaivoson</a></span>&nbsp;<span class="post-category">included in <a href="https://ranaivo-it.github.io/me/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1899 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;9 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2432 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="https://ranaivo-it.github.io/me/svg/loading.min.svg"
@@ -120,6 +120,7 @@
         <li><a href="#3-generate-data-sample-and-rename-columns">3. Generate data sample and rename columns</a></li>
         <li><a href="#4-reverse-row-and-column-order">4. Reverse row and column order</a></li>
         <li><a href="#5-missing-data">5. Missing data</a></li>
+        <li><a href="#6-split-cells-data">6. Split cells data</a></li>
       </ul>
     </li>
   </ul>
@@ -1031,6 +1032,270 @@ Here we can notice that the features get reduced. The first two columns <code>co
 </div>
         </div>
     </div>
+<h3 id="6-split-cells-data">6. Split cells data</h3>
+<p>Splitting data is useful while dealing with <code>object</code> or <code>category</code> like data types. Let us assume that we are interested in splitting the <code>stop_date</code> into <code>day</code>, <code>month</code>, and <code>year</code>. There are at least two ways of doing so. The first and easiest approach is to treat the attribute <code>stop_date</code> as <code>string</code> and apply the transformation onto the string since there exists a couple of string manipulation helper on Python. But in our case, <code>stop_date</code> has already parsed to <code>datetime64</code> while loading the dataset. By using the string helper functions, we are obliged to downcast again the field into <code>str</code> then applying split to the data afterward. This is computationally expensive when having millions of rows. The second approach comes into play to address this problem. In this, we treat the attribute as <code>datetime64</code> and apply directly the transformation onto it.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="c1"># Approach 1.1: string parsing</span>
+<span class="n">police</span><span class="p">[[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">police</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Approach 1.2: string parsing</span>
+<span class="n">police</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s2">&#34;stop_date&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">police</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s2">&#34;stop_date&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">police</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s2">&#34;stop_date&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">police</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Approach 2: datetime parsing</span>
+<span class="n">police</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
+<span class="n">police</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+<span class="n">police</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+<span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">police</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>The same operation can easily be applied to <code>object</code> or <code>category</code> data types</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python">
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;fullname&#39;</span><span class="p">:[</span><span class="s1">&#39;John Doe McArthur&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane Smith McDonald&#39;</span><span class="p">],</span>
+                   <span class="s1">&#39;address&#39;</span><span class="p">:[</span><span class="s1">&#39;Los Angeles, CA&#39;</span><span class="p">,</span> <span class="s1">&#39;Washington, DC&#39;</span><span class="p">]})</span>
+
+<span class="c1"># Split fullname using space or tab as criteria</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;fullname&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df</span>
+<span class="c1"># Split fullname using the same criteria and rename the newly generated columns</span>
+<span class="n">df</span><span class="p">[[</span><span class="s2">&#34;first&#34;</span><span class="p">,</span> <span class="s2">&#34;middle&#34;</span><span class="p">,</span> <span class="s2">&#34;last&#34;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fullname&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df</span>
+<span class="c1"># Split location into city and state using comma as criteria </span>
+<span class="n">df</span><span class="p">[[</span><span class="s2">&#34;City&#34;</span><span class="p">,</span> <span class="s2">&#34;State&#34;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><div class="details admonition question">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw"></i>Output<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>The first set will produce the same output though there is a slight difference in the way how the data was parsed here. The first one with <code>astype()</code> will parse the date before the data is loaded as <code>datetime64</code> whereas <code>lambda()</code> will process right after the data is being loaded. Therefore, the first one will have the <code>day</code> string whereas the second will get the <code>day</code> along with the <code>time</code>.</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stop_date</th>
+      <th>stop_time</th>
+      <th>county_name</th>
+      <th>driver_gender</th>
+      <th>driver_age_raw</th>
+      <th>driver_age</th>
+      <th>driver_race</th>
+      <th>violation_raw</th>
+      <th>violation</th>
+      <th>search_conducted</th>
+      <th>search_type</th>
+      <th>stop_outcome</th>
+      <th>is_arrested</th>
+      <th>stop_duration</th>
+      <th>drugs_related_stop</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2005-01-02</td>
+      <td>01:55</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>1985.0</td>
+      <td>20.0</td>
+      <td>White</td>
+      <td>Speeding</td>
+      <td>Speeding</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>Citation</td>
+      <td>False</td>
+      <td>0-15 Min</td>
+      <td>False</td>
+      <td>2005</td>
+      <td>01</td>
+      <td>02</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2005-01-18</td>
+      <td>08:15</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>1965.0</td>
+      <td>40.0</td>
+      <td>White</td>
+      <td>Speeding</td>
+      <td>Speeding</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>Citation</td>
+      <td>False</td>
+      <td>0-15 Min</td>
+      <td>False</td>
+      <td>2005</td>
+      <td>01</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2005-01-23</td>
+      <td>23:15</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>1972.0</td>
+      <td>33.0</td>
+      <td>White</td>
+      <td>Speeding</td>
+      <td>Speeding</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>Citation</td>
+      <td>False</td>
+      <td>0-15 Min</td>
+      <td>False</td>
+      <td>2005</td>
+      <td>01</td>
+      <td>23</td>
+    </tr>
+  </tbody>
+</table>
+<p>The second dataframe output</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fullname</th>
+      <th>address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>John Doe McArthur</td>
+      <td>Los Angeles, CA</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Jane Smith McDonald</td>
+      <td>Washington, DC</td>
+    </tr>
+  </tbody>
+</table>
+<p>After splitting <code>fullname</code> into three fields</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>John</td>
+      <td>Doe</td>
+      <td>McArthur</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Jane</td>
+      <td>Smith</td>
+      <td>McDonald</td>
+    </tr>
+  </tbody>
+</table>
+<p>After splitting <code>fullname</code> and <code>address</code></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fullname</th>
+      <th>address</th>
+      <th>First</th>
+      <th>Middle</th>
+      <th>Last</th>
+      <th>City</th>
+      <th>State</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>John Doe McArthur</td>
+      <td>Los Angeles, CA</td>
+      <td>John</td>
+      <td>Doe</td>
+      <td>McArthur</td>
+      <td>Los Angeles</td>
+      <td>CA</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Jane Smith McDonald</td>
+      <td>Washington, DC</td>
+      <td>Jane</td>
+      <td>Smith</td>
+      <td>McDonald</td>
+      <td>Washington</td>
+      <td>DC</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+        </div>
+    </div>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -1042,7 +1307,7 @@ Here we can notice that the features get reduced. The first two columns <code>co
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on Oct 6, 2020</span>
+                <span>Updated on Oct 11, 2020</span>
             </div>
             <div class="post-info-license"></div>
         </div>
