@@ -8,10 +8,10 @@
         <title>Pandas Best Practices - Mahery Ranaivoson | Blog</title><meta name="Description" content="Pandas tutorial"><meta property="og:title" content="Pandas Best Practices" />
 <meta property="og:description" content="Pandas tutorial" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ranaivo-it.github.io/me/posts/pandas-best-practice/" />
-<meta property="og:image" content="https://ranaivo-it.github.io/images/twitter-card.png"/>
+<meta property="og:url" content="https://ranaivo-it.github.io/me/posts/pandas-best-practice/" /><meta property="og:image" content="https://ranaivo-it.github.io/images/twitter-card.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-09-27T01:46:24+02:00" />
-<meta property="article:modified_time" content="2020-10-11T15:58:26+02:00" />
+<meta property="article:modified_time" content="2022-08-03T15:58:26+02:00" />
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://ranaivo-it.github.io/images/twitter-card.png"/>
 
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/"
-        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  2433 ,
-        "url": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/","datePublished": "2020-09-27T01:46:24+02:00","dateModified": "2020-10-11T15:58:26+02:00","publisher": {
+        },"genre": "posts","keywords": "pandas, data_analysis","wordcount":  2680 ,
+        "url": "https:\/\/ranaivo-it.github.io\/me\/posts\/pandas-best-practice\/","datePublished": "2020-09-27T01:46:24+02:00","dateModified": "2022-08-03T15:58:26+02:00","publisher": {
             "@type": "Organization",
             "name": "Mahery Ranaivoson"},"author": {
                 "@type": "Person",
@@ -93,8 +93,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Pandas Best Practices</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://ranaivo-it.github.io/me/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mahery Ranaivoson</a></span>&nbsp;<span class="post-category">included in <a href="https://ranaivo-it.github.io/me/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2433 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;12 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="Sep 27, 2020">Sep 27, 2020</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2680 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;13 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="https://ranaivo-it.github.io/me/svg/loading.min.svg"
@@ -121,6 +121,7 @@
         <li><a href="#4-reverse-row-and-column-order">4. Reverse row and column order</a></li>
         <li><a href="#5-missing-data">5. Missing data</a></li>
         <li><a href="#6-split-cells-data">6. Split cells data</a></li>
+        <li><a href="#7-filter-a-dataframe">7. Filter a dataframe</a></li>
       </ul>
     </li>
   </ul>
@@ -145,31 +146,30 @@
     </a><figcaption class="image-caption">This is not a Panda or the Pandas I&rsquo;m talking about.</figcaption>
     </figure>
 <p><strong><a href="https://pandas.pydata.org/docs/getting_started/index.html" target="_blank" rel="noopener noreffer">Pandas</a></strong> is one of the most-used standard Python library when dealing with matrix-like transformable datasets which range from a simple tabular to a more complex structure dataset. It is an open-source library providing faster, flexible, and expressive mean for data manipulation and one of the essential to learn library in case you are getting in the data science field.<br>
-Mainly, it provides two well-suited data structures to multiple data type include <strong>Series</strong> and <strong>DataFrame</strong>. This article will get into how to use both of them and the case on which one may be helpful over the other in the following.</p>
+It mainly provides two well-suited data structures to multiple data type include <strong>Series</strong> and <strong>DataFrame</strong>. This article will get into how to use both of them and the case on which one may be helpful over the other in the following.</p>
 <h2 id="installation">Installation</h2>
 <p>Pandas can be installed via pip from <strong><a href="https://pypi.org/project/pandas/" target="_blank" rel="noopener noreffer">PyPI</a></strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">pip install pandas
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install pandas
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>or using the <a href="https://docs.anaconda.com/anaconda/install/" target="_blank" rel="noopener noreffer">Anaconda</a> or <a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank" rel="noopener noreffer">Miniconda</a> environment,</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">conda install pandas
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">conda install pandas
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="pandas-components">Pandas components</h2>
 <p>As mentioned earlier and to handle different types of datasets, pandas provides 2 data structures mainly wrapped over Numpy. <code>Series</code> is nothing but one dimension representation similar to the Numpy array but structured in the way it is explicitly associate an index with the values. Whereas <code>DataFrame</code> is a multi-dimensional array that can be thought of as a collection of series and its rows are also indexed by default unless it is explicitly done. They are pretty similar in terms of operations as one can apply almost the same manipulation to both of them.</p>
-<figure>
-    <img src="https://ranaivo-it.github.io/me/posts/pandas-best-practice/pandas_main_comps.png"
-         alt="credit: www.learndatasci.com" width="600" height="500"/> <figcaption>
+<figure><img src="https://ranaivo-it.github.io/me/posts/pandas-best-practice/pandas_main_comps.png"
+         alt="credit: www.learndatasci.com" width="600" height="500"/><figcaption>
             <h4>Pandas main components</h4>
         </figcaption>
 </figure>
@@ -180,7 +180,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 <h3 id="1-importing-necessary-libraries">1. Importing necessary libraries</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -195,20 +195,20 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span> 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span> 
-
-<span class="c1"># whether to explicitly show the whole interactive output cells in </span>
-<span class="c1"># jupyter notebook rather than showing only the last line.</span>
-<span class="c1"># use `last_expr` to revert back the default behavior</span>
-<span class="kn">from</span> <span class="nn">IPython.core.interactiveshell</span> <span class="kn">import</span> <span class="n">InteractiveShell</span>
-<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">ast_node_interactivity</span> <span class="o">=</span> <span class="s2">&#34;all&#34;</span>
-<span class="c1"># whether to display all DataFrame rows and cols </span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>  
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># whether to explicitly show the whole interactive output cells in </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># jupyter notebook rather than showing only the last line.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># use `last_expr` to revert back the default behavior</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">IPython.core.interactiveshell</span> <span class="kn">import</span> <span class="n">InteractiveShell</span>
+</span></span><span class="line"><span class="cl"><span class="n">InteractiveShell</span><span class="o">.</span><span class="n">ast_node_interactivity</span> <span class="o">=</span> <span class="s2">&#34;all&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># whether to display all DataFrame rows and cols </span>
+</span></span><span class="line"><span class="cl"><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>  
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="details admonition info open">
         <div class="details-summary admonition-title">
@@ -226,7 +226,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 <p>This is the first essential tasks that you would perform before getting started your analysis. Understanding the dataset may extend from knowing what&rsquo;s inside, its content, its shape, the variable names, the variable datatypes, the ratio of null values, or going deeper to know the number of unique values of categorical variables, or even gather the descriptive statistics or the variable distribution. The following code snippet shows a few essential functions along with the must to know arguments to answer these questions.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -237,20 +237,24 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">police</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/police_project.csv&#39;</span><span class="p">,</span> 
-                 <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> 
-                 <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">],</span>
-                 <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                 <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">,</span> <span class="s1">&#39;driver_gender&#39;</span><span class="p">,</span><span class="s1">&#39;driver_age_raw&#39;</span><span class="p">,</span> <span class="s1">&#39;violation&#39;</span><span class="p">])</span>
-
-<span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">police</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">memory_usage</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">)</span>
-<span class="c1"># police.columns.to_series().groupby(police.dtypes).groups</span>
-<span class="n">police</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">object</span><span class="p">])</span>
-<span class="n">police</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl"><span class="n">police</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/police_project.csv&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                 <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                 <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">,</span> <span class="s1">&#39;driver_gender&#39;</span><span class="p">,</span><span class="s1">&#39;driver_age_raw&#39;</span><span class="p">,</span> <span class="s1">&#39;violation&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">memory_usage</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Whether to display all columns with their respective types </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#police.columns.to_series().groupby(police.dtypes).groups</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Only filter `number`, `datetime`, and `object` types</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">object</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="details admonition question">
         <div class="details-summary admonition-title">
@@ -298,7 +302,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 <p><strong><code>df.info()</code></strong> will trough us some important properties of the entire dataset. By specifying <code>memory_usage='deep'</code> it will introspect and return the exact amount of memory consumption.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -310,17 +314,17 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  RangeIndex: <span class="m">91741</span> entries, <span class="m">0</span> to <span class="m">91740</span>
-  Data columns <span class="o">(</span>total <span class="m">4</span> columns<span class="o">)</span>:
-    <span class="c1">#   Column         Non-Null Count  Dtype         </span>
-  ---  ------         --------------  -----         
-    <span class="m">0</span>   stop_date      <span class="m">91741</span> non-null  datetime64<span class="o">[</span>ns<span class="o">]</span>
-    <span class="m">1</span>   driver_gender  <span class="m">86406</span> non-null  object        
-    <span class="m">2</span>   driver_age     <span class="m">86120</span> non-null  float64       
-    <span class="m">3</span>   violation      <span class="m">86408</span> non-null  object        
-  dtypes: datetime64<span class="o">[</span>ns<span class="o">](</span>1<span class="o">)</span>, float64<span class="o">(</span>1<span class="o">)</span>, object<span class="o">(</span>2<span class="o">)</span>
-  memory usage: 12.0 MB
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  RangeIndex: <span class="m">91741</span> entries, <span class="m">0</span> to <span class="m">91740</span>
+</span></span><span class="line"><span class="cl">  Data columns <span class="o">(</span>total <span class="m">4</span> columns<span class="o">)</span>:
+</span></span><span class="line"><span class="cl">    <span class="c1">#   Column         Non-Null Count  Dtype         </span>
+</span></span><span class="line"><span class="cl">  ---  ------         --------------  -----         
+</span></span><span class="line"><span class="cl">    <span class="m">0</span>   stop_date      <span class="m">91741</span> non-null  datetime64<span class="o">[</span>ns<span class="o">]</span>
+</span></span><span class="line"><span class="cl">    <span class="m">1</span>   driver_gender  <span class="m">86406</span> non-null  object        
+</span></span><span class="line"><span class="cl">    <span class="m">2</span>   driver_age     <span class="m">86120</span> non-null  float64       
+</span></span><span class="line"><span class="cl">    <span class="m">3</span>   violation      <span class="m">86408</span> non-null  object        
+</span></span><span class="line"><span class="cl">  dtypes: datetime64<span class="o">[</span>ns<span class="o">](</span>1<span class="o">)</span>, float64<span class="o">(</span>1<span class="o">)</span>, object<span class="o">(</span>2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  memory usage: 12.0 MB
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br> 
 <p><strong><code>dropna().describe()</code></strong> and <strong><code>dropna().select_dtypes().describe()</code></strong> are here used to get a quick summary of statistics by filtered columns by the data types. <code>include=[np.number, np.datetime64, np.object]</code> and <code>select_dtypes(include=['number'])</code> filter out columns by data types and by default the first one will include all the columns whereas the second will through an error as <code>select_dtypes()</code> required at least one parameter. The first doesn&rsquo;t have any effect in this case as all the dataset dtypes are including in the list whereas the second only outputs column number of type <code>number</code> which is here <code>driver_age_raw</code>. To get a quick summary of columns datatypes grouped by columns, you can uncomment the code at the <code>line 9</code>. We can notice from the first output that some of the outputs are <code>NaN</code> and that is so because properties are data types dependent which means those that can apply to object data cannot apply to other data types and vice-versa.</p>
@@ -478,7 +482,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 <p>Generating synthetic sample may help us in some situation like conducting an experiment, for instance, testing algorithms, making visualization to better understand changes over your experiment, and so on. There are several ways of generating samples for any purpose but the following made use of Pandas and Numpy to make it simple.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -488,15 +492,15 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="c1"># Create a dataframe and rename columns </span>
-<span class="c1"># Eg. 1</span>
-<span class="n">foo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Col One&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="s1">&#39;Col Two&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">]})</span>
-<span class="n">foo</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;Col One&#39;</span><span class="p">:</span> <span class="s1">&#39;col_one&#39;</span><span class="p">,</span> <span class="s1">&#39;Col Two&#39;</span><span class="p">:</span> <span class="s1">&#39;col_two&#39;</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="c1"># Eg. 2</span>
-<span class="n">bar</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcde&#39;</span><span class="p">))</span>
-<span class="n">bar</span><span class="o">.</span><span class="n">add_prefix</span><span class="p">(</span><span class="s1">&#39;X_&#39;</span><span class="p">)</span>
-<span class="c1"># </span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl"><span class="c1"># Create a dataframe and rename columns </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Eg. 1</span>
+</span></span><span class="line"><span class="cl"><span class="n">foo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Col One&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="s1">&#39;Col Two&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">]})</span>
+</span></span><span class="line"><span class="cl"><span class="n">foo</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;Col One&#39;</span><span class="p">:</span> <span class="s1">&#39;col_one&#39;</span><span class="p">,</span> <span class="s1">&#39;Col Two&#39;</span><span class="p">:</span> <span class="s1">&#39;col_two&#39;</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Eg. 2</span>
+</span></span><span class="line"><span class="cl"><span class="n">bar</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcde&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">bar</span><span class="o">.</span><span class="n">add_prefix</span><span class="p">(</span><span class="s1">&#39;X_&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="details admonition question">
         <div class="details-summary admonition-title">
@@ -580,7 +584,7 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 <p>These are basic operations which consist of reversing the original order of the DataFrame row-wise or column-wise. Here, <code>reset_index()</code> is used to drop the old index and create a new one starting from 0. We can notice the difference between the first and the second output table.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -588,13 +592,13 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="c1"># Reverse rows</span>
-<span class="n">police</span><span class="o">.</span><span class="n">loc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="c1"># Reverse rows and drop the old index </span>
-<span class="n">police</span><span class="o">.</span><span class="n">loc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="c1"># Reverse columns</span>
-<span class="n">police</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl"><span class="c1"># Reverse rows</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="o">.</span><span class="n">loc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Reverse rows and drop the old index </span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="o">.</span><span class="n">loc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Reverse columns</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="details admonition question">
         <div class="details-summary admonition-title">
@@ -713,10 +717,10 @@ Mainly, it provides two well-suited data structures to multiple data type includ
         </div>
     </div>
 <h3 id="5-missing-data">5. Missing data</h3>
-<p>Missing data is a common problem that we encounter in our data analysis task. In the machine learning task, one can define missing values as missing information that would bring additional information if they are observed<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. The following method displays the column-wise percentage of missing data along with a pythonic way of getting rid of columns having only missing data followed by a way to filter columns out based on the ratio of missing values.</p>
+<p>Missing data is a common problem that we encounter in our data analysis task. In the machine learning task, one can define missing values as missing information that would bring additional information if they are observed<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. For that, investigating the missing information plays an important role in the data analysis problem. The following method displays the column-wise percentage of missing data followed by a pythonic way of getting rid of columns having only missing data followed by a tricky way to filter columns out based on the ratio of missing values.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -746,39 +750,43 @@ Mainly, it provides two well-suited data structures to multiple data type includ
 </span><span class="lnt">28
 </span><span class="lnt">29
 </span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="c1"># Reload the datset with full features</span>
-<span class="n">police</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/police_project.csv&#39;</span><span class="p">,</span> 
-                 <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> 
-                 <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">],</span>
-                 <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">percent_missing</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="s1">&#39;&#39;&#39;Missing data information summary&#39;&#39;&#39;</span>
-    <span class="n">percent_missing</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">missing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;column_name&#39;</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="s1">&#39;percent_missing&#39;</span><span class="p">:</span> <span class="n">percent_missing</span><span class="p">})</span>
-    <span class="n">missing</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;percent_missing&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">missing</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">missing</span>
-
-<span class="k">def</span> <span class="nf">remove_missing</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">keep_ratio</span><span class="o">=.</span><span class="mi">9</span><span class="p">):</span>
-    <span class="s1">&#39;&#39;&#39;Missing data removal&#39;&#39;&#39;</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="c1"># The pythonic way of getting rid of columns having only missing values</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&#34;columns&#34;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="c1"># Keep columns having at least 90%(default value of keep_ratio)</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">*</span><span class="n">keep_ratio</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">df</span>
-    
-<span class="c1"># Missing data summary </span>
-<span class="n">missing</span> <span class="o">=</span> <span class="n">percent_missing</span><span class="p">(</span><span class="n">police</span><span class="p">)</span>
-<span class="n">missing</span>
-<span class="c1"># Keep columns having at least 90% values</span>
-<span class="n">new_police</span> <span class="o">=</span> <span class="n">remove_missing</span><span class="p">(</span><span class="n">police</span><span class="p">,</span> <span class="o">.</span><span class="mi">9</span><span class="p">)</span>
-<span class="n">new_missing</span> <span class="o">=</span> <span class="n">percent_missing</span><span class="p">(</span><span class="n">new_police</span><span class="p">)</span>
-<span class="n">new_missing</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl"><span class="c1"># Reload the datset with full features</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/police_project.csv&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                 <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                 <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">percent_missing</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;Missing data information summary&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">percent_missing</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">missing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;column_name&#39;</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="s1">&#39;percent_missing&#39;</span><span class="p">:</span> <span class="n">percent_missing</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="n">missing</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;percent_missing&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">missing</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">missing</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">remove_missing</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">keep_ratio</span><span class="o">=</span><span class="mf">.9</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;Missing data removal&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># The pythonic way of getting rid of columns having only missing values</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&#34;columns&#34;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Keep columns having at least 90%(default value of keep_ratio)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">*</span><span class="n">keep_ratio</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Alternative using index </span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#df = df[df.columns[df.isna().sum()/df.shape[0] &lt; 0.9 ]]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">df</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="c1"># Missing data summary </span>
+</span></span><span class="line"><span class="cl"><span class="n">missing</span> <span class="o">=</span> <span class="n">percent_missing</span><span class="p">(</span><span class="n">police</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">missing</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Keep columns having at least 90% values</span>
+</span></span><span class="line"><span class="cl"><span class="n">new_police</span> <span class="o">=</span> <span class="n">remove_missing</span><span class="p">(</span><span class="n">police</span><span class="p">,</span> <span class="mf">.9</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">new_missing</span> <span class="o">=</span> <span class="n">percent_missing</span><span class="p">(</span><span class="n">new_police</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">new_missing</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="details admonition question">
         <div class="details-summary admonition-title">
@@ -1036,7 +1044,7 @@ Here we can notice that the features get reduced. The first two columns <code>co
 <p>Splitting data is useful while dealing with <code>object</code> or <code>category</code> like data types. Let us assume that we are interested in splitting the <code>stop_date</code> into <code>day</code>, <code>month</code>, and <code>year</code>. There are at least two ways of doing so. The first and easiest approach is to treat the attribute <code>stop_date</code> as <code>string</code> and apply the transformation onto the string since there exists a couple of string manipulation helper on Python. But in our case, <code>stop_date</code> has already parsed to <code>datetime64</code> while loading the dataset. By using the string helper functions, we are obliged to downcast again the field into <code>str</code> then applying split to the data afterward. This is computationally expensive when having millions of rows. The second approach comes into play to address this problem. In this, we treat the attribute as <code>datetime64</code> and apply directly the transformation onto it.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1054,71 +1062,35 @@ Here we can notice that the features get reduced. The first two columns <code>co
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
-</span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="c1"># Approach 1.1: string parsing</span>
-<span class="n">police</span><span class="p">[[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">police</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-<span class="c1"># Approach 1.2: string parsing</span>
-<span class="n">police</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s2">&#34;stop_date&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">police</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s2">&#34;stop_date&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">police</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s2">&#34;stop_date&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">police</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-<span class="c1"># Approach 2: datetime parsing</span>
-<span class="n">police</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
-<span class="n">police</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
-<span class="n">police</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
-<span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">police</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-</code></pre></td></tr></table>
-</div>
-</div><p>The same operation can easily be applied to <code>object</code> or <code>category</code> data types</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python">
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;fullname&#39;</span><span class="p">:[</span><span class="s1">&#39;John Doe McArthur&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane Smith McDonald&#39;</span><span class="p">],</span>
-                   <span class="s1">&#39;address&#39;</span><span class="p">:[</span><span class="s1">&#39;Los Angeles, CA&#39;</span><span class="p">,</span> <span class="s1">&#39;Washington, DC&#39;</span><span class="p">]})</span>
-
-<span class="c1"># Split fullname using space or tab as criteria</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;fullname&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df</span>
-<span class="c1"># Split fullname using the same criteria and rename the newly generated columns</span>
-<span class="n">df</span><span class="p">[[</span><span class="s2">&#34;first&#34;</span><span class="p">,</span> <span class="s2">&#34;middle&#34;</span><span class="p">,</span> <span class="s2">&#34;last&#34;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fullname&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df</span>
-<span class="c1"># Split location into city and state using comma as criteria </span>
-<span class="n">df</span><span class="p">[[</span><span class="s2">&#34;City&#34;</span><span class="p">,</span> <span class="s2">&#34;State&#34;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl"><span class="c1"># Approach 1.1: string parsing</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="p">[[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Approach 1.2: string parsing</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s2">&#34;stop_date&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s2">&#34;stop_date&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s2">&#34;stop_date&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Approach 2: datetime parsing</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">police</span><span class="p">[</span><span class="s1">&#39;stop_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">police</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="details admonition question">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-question-circle fa-fw"></i>Output<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content"><p>The first set will produce the same output though there is a slight difference in the way how the data was parsed here. The first one with <code>astype()</code> will parse the date before the data is loaded as <code>datetime64</code> whereas <code>lambda()</code> will process right after the data is being loaded. Therefore, the first one will have the <code>day</code> string whereas the second will get the <code>day</code> along with the <code>time</code>.</p>
+            <div class="admonition-content"><p>The string parsing approach will produce the same output though there is a slight difference in the way how the data is being parsed in this case. The first method via <code>astype()</code> will parse the date while the data is loaded as <code>datetime64</code> whereas the <code>lambda()</code> function will process right after the data has been loaded. Therefore, the first one will have the <code>day</code> string whereas the second will get the <code>day</code> along with the <code>time</code> which is a set of <code>hour</code>, <code>minute</code>, and <code>second</code>.<br>
+The DateTime parsing is an in-built Pandas feature that can only apply to columns of type <code>datetime</code> but is the most convenient way to extract date components.</p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1209,7 +1181,46 @@ Here we can notice that the features get reduced. The first two columns <code>co
     </tr>
   </tbody>
 </table>
-<p>The second dataframe output</p>
+</div>
+        </div>
+    </div>
+<p>The same operation can easily be applied to <code>object</code> or <code>category</code> data types</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;fullname&#39;</span><span class="p">:[</span><span class="s1">&#39;John Doe McArthur&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane Smith McDonald&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                   <span class="s1">&#39;address&#39;</span><span class="p">:[</span><span class="s1">&#39;Los Angeles, CA&#39;</span><span class="p">,</span> <span class="s1">&#39;Washington, DC&#39;</span><span class="p">]})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Split fullname using space or tab as criteria</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;fullname&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Split fullname using the same criteria and rename the newly generated columns</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[[</span><span class="s2">&#34;first&#34;</span><span class="p">,</span> <span class="s2">&#34;middle&#34;</span><span class="p">,</span> <span class="s2">&#34;last&#34;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fullname&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Split location into city and state using comma as criteria </span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[[</span><span class="s2">&#34;City&#34;</span><span class="p">,</span> <span class="s2">&#34;State&#34;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition question">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw"></i>Output<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>The dataframe looks like</p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1231,7 +1242,7 @@ Here we can notice that the features get reduced. The first two columns <code>co
     </tr>
   </tbody>
 </table>
-<p>After splitting <code>fullname</code> into three fields</p>
+<p>After splitting <code>fullname</code> by space, it will generate three fields</p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1256,7 +1267,7 @@ Here we can notice that the features get reduced. The first two columns <code>co
     </tr>
   </tbody>
 </table>
-<p>After splitting <code>fullname</code> and <code>address</code></p>
+<p>After splitting <code>fullname</code> and <code>address</code>, the generated fields have now their own header names</p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1296,18 +1307,22 @@ Here we can notice that the features get reduced. The first two columns <code>co
 </div>
         </div>
     </div>
-<section class="footnotes" role="doc-endnotes">
+<h3 id="7-filter-a-dataframe">7. Filter a dataframe</h3>
+<p>What makes a Pandas dataframe different from the other multi-dimensional data structures like Numpy is the way how it organizes the dataset to ease the manipulation task. Pandas makes use of index at every dimension of data in a Series or DataFrame. The index serves as label for each and every row and column to allow users accessing any specific set of cells. This makes the filtering tasks pretty straightforward. Indexes are, by default, of type integer unless it has explicitly preset. <br>
+There are multiple ways to access the indexes but two of them are common amongst the data science community including <strong>indexing operator</strong> which refers to the brackets, <strong>[]</strong> directly attached after a Series or DataFrame, and <strong>indexers</strong> that are in-built attributes of a Series and DataFrame like <code>.iloc</code> and <code>.loc</code>. <br>
+Alike to the previous approach, I will give some set of examples in the following from which you can easly derive for your own use case.</p>
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p><a href="https://towardsdatascience.com/all-about-missing-data-handling-b94b8b5d2184" target="_blank" rel="noopener noreffer">All about missing data handling</a>, by Baijayanta Roy <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:1">
+<p><a href="https://towardsdatascience.com/all-about-missing-data-handling-b94b8b5d2184" target="_blank" rel="noopener noreffer">All about missing data handling</a>, by Baijayanta Roy&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section></div><div class="post-footer" id="post-footer">
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on Oct 11, 2020</span>
+                <span>Updated on Aug 3, 2022</span>
             </div>
             <div class="post-info-license"></div>
         </div>

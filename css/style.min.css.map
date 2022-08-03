@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "style.min.css",
-	"sourceRoot": "/home/zero/Documents/DATA SCIENCE/WEBSITE",
+	"sourceRoot": "/home/mahery/Documents/Mahery-SP/POC AND PROJECTS/WEBSITE",
 	"sources": [
 		"themes/LoveIt/assets/css/style.scss",
 		"themes/LoveIt/assets/css/_variables.scss",
